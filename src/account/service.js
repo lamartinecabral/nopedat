@@ -51,6 +51,21 @@ export function initAuthListener() {
   });
 }
 
+export function initConfig() {
+  getDoc(doc(db, "config", "feature_flags"))
+    .then((snap) => {
+      const data = snap.data() || {};
+      if (data.authLock) {
+        State.authLock.pub(true);
+      } else {
+        State.authLock.pub(false);
+      }
+    })
+    .catch((err) => {
+      console.error("Failed to load config:", err);
+    });
+}
+
 function listDocs() {
   const filter = query(
     collection(db, "ownerships"),

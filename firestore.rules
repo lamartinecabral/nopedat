@@ -57,6 +57,10 @@ service cloud.firestore {
       	uidEqual(resource.data.owner);
     }
     
+    match /config/{docId} {
+    	allow read: if true;
+    }
+    
     function affectedKeys(){
       return request.resource.data.diff(resource.data).affectedKeys();
     }

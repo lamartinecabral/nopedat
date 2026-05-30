@@ -15,4 +15,5 @@ export const State = {
   viewMode: new Subject(
     localStorage.getItem("notepade_mypage_viewmode") || "list",
   ),
+  authLock: new Subject(true),
 };

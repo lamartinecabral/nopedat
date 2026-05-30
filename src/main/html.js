@@ -40,7 +40,7 @@ const elements = [
     elem(options, { href: "#", hidden: true }, "options"),
   ]),
   elem(github, [
-    elem("a", { href: "https://github.com/lamartinecabral/notepad" }, [
+    elem("a", { href: "https://github.com/lamartinecabral/nopedat" }, [
       elem("img", { src: "./assets/github.svg" }),
     ]),
   ]),

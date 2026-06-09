@@ -13,6 +13,7 @@ const entries = {
     "js/codemirror": "./src/codemirror/index.js",
     "js/firebase": "./src/firebase/index.js",
     "js/download": "./src/download/index.js",
+    "js/mermaid": "./src/mermaid/index.js",
   },
 };
 

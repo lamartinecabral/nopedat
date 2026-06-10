@@ -9,4 +9,4 @@ jobs:
       - uses: actions/checkout@v6
       - run: node -p "console.log('oi', String(process.env.FIREBASE_CONFIG).length)"
         env:
-          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+          FIREBASE_CONFIG: ${{ vars.FIREBASE_CONFIG }}

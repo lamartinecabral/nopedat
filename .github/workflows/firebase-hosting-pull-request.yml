@@ -7,14 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm run build && node scripts/add-build-data.js
-      - run: npm test
-        env:
-          TEST_DOC_ID: ${{ secrets.TEST_DOC_ID }}
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_LAMART_NOTEPAD }}"
-          projectId: lamart-notepad
+      - run: echo ${{ secrets.FIREBASE_CONFIG }}

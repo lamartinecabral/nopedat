@@ -7,4 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: echo ${{ secrets.FIREBASE_CONFIG }}
+      - run: node -p "console.log('oi', String(process.env.FIREBASE_CONFIG).length)"
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}

@@ -1,3 +1,13 @@
+const webpack = require("webpack");
+
+require("dotenv").config({ quiet: true });
+
+const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG;
+
+if (!FIREBASE_CONFIG) {
+  throw new Error("FIREBASE_CONFIG environment variable is not set");
+}
+
 const entries = {
   entry: {
     "js/account": "./src/account/index.js",
@@ -15,6 +25,11 @@ const entries = {
     "js/download": "./src/download/index.js",
     "js/mermaid": "./src/mermaid/index.js",
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.FIREBASE_CONFIG": JSON.stringify(FIREBASE_CONFIG),
+    }),
+  ],
 };
 
 const es5Entries = {
@@ -22,6 +37,11 @@ const es5Entries = {
     "js/main": "./src/main/index.js",
     "js/firebase8": "./src/firebase8/index.js",
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.FIREBASE_CONFIG": JSON.stringify(FIREBASE_CONFIG),
+    }),
+  ],
   module: {
     rules: [
       {

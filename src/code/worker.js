@@ -7,7 +7,6 @@ postMessage("codeWorkerReady");
 
 addEventListener("message", (ev) => {
   if ("type" in ev.data && ev.data.type === "codeWorkerMessage") {
-    console.clear();
     try {
       postMessage({
         type: "codeWorkerMessage",

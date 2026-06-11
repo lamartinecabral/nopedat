@@ -36,7 +36,12 @@ const getParsedCode = ({ language, source }) => {
       });
     }
     case "jsx": {
-      const { code } = getBabel().transform(source, { presets: ["react"] });
+      const { code } = getBabel().transform(source, {
+        presets: [
+          ["typescript", { allExtensions: true, isTSX: true }],
+          "react",
+        ],
+      });
       return codeBoilerplate({ language: "jsx", source: code ?? "" });
     }
     case "mermaid": {

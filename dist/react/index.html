@@ -32,8 +32,13 @@
           if (res.metadata.hasPendingWrites) return;
           try {
             const text = res.exists() ? res.data().text : '';
-            const { code } = Babel.transform(text, { presets: ['react'] });
-            const content = codeBoilerplate({ language: 'jsx', source: code });
+            const { code } = Babel.transform(text, {
+              presets: [
+                ["typescript", { allExtensions: true, isTSX: true }],
+                "react",
+              ],
+            });
+            const content = codeBoilerplate({ language: "jsx", source: code });
             notepadIframe.setContent(content);
           }
           catch (e) {

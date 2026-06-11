@@ -40,6 +40,9 @@ const getParsedCode = ({ language, source }) => {
       const { code } = getBabel().transform(source, { presets: ["react"] });
       return codeBoilerplate({ language: "jsx", source: code ?? "" });
     }
+    case "mermaid": {
+      return codeBoilerplate({ language: "mermaid", source });
+    }
     default: {
       return "";
     }

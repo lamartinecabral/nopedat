@@ -13,6 +13,7 @@ import { markdown } from "@codemirror/lang-markdown";
 import { python } from "@codemirror/lang-python";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { mermaid } from "codemirror-lang-mermaid";
 
 let changeHandler;
 
@@ -30,7 +31,7 @@ export const onModS = (func) => {
 
 const handleModS = () => {
   if (!modSHandler) return false;
-  return modSHandler(), true;
+  return (modSHandler(), true);
 };
 
 const modS = {
@@ -85,6 +86,7 @@ const getLanguage = () => {
         markdown({
           defaultCodeLanguage: javascript(),
         }),
+      mermaid: () => [mermaid(), syntaxErrorLinter],
     }[currentLang]?.() ?? []
   );
 };

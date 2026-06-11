@@ -33,6 +33,19 @@ const codeBoilerplate = ({ language, source }) => {
         `</script></body>`
       );
     }
+    case "mermaid": {
+      return `
+        <body><pre class="mermaid">${source}</pre>
+        <script type="module">
+          import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+          mermaid.initialize({ startOnLoad: false });
+          mermaid.run().catch((err)=>{
+            console.error(err);
+            document.querySelector('pre').innerHTML = err?.error?.stack ?? err?.message ?? String(err);
+          });
+        </script></body>
+      `;
+    }
     default: {
       return "";
     }

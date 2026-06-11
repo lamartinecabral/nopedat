@@ -33,6 +33,10 @@ export const Languages = {
     value: "markdown",
     label: "markdown",
   },
+  mermaid: {
+    value: "mermaid",
+    label: "mermaid",
+  },
   python: {
     value: "python",
     label: "python",

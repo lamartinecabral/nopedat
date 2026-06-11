@@ -143,6 +143,8 @@ class Control {
           return "/script/?";
         case "jsx":
           return "/react/?";
+        case "mermaid":
+          return "/mermaid/?";
         default:
           return "";
       }

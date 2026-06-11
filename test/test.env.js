@@ -1,30 +1,19 @@
 // @ts-check
 const fs = require("fs");
+require("dotenv").config({ quiet: true });
 
-/** @type {Record<string,string>} */
-const dotenv = fs.existsSync(".env")
-  ? fs
-      .readFileSync(".env")
-      .toString()
-      .trim()
-      .split("\n")
-      .filter((a) => a.includes("="))
-      .map((a) => {
-        const [key, ...value] = a.split("=");
-        return [key, value.join("=")];
-      })
-      .reduce((a, [key, value]) => {
-        a[key] = value;
-        return a;
-      }, {})
-  : {};
+const host = process.env.HOST;
+const docId = process.env.TEST_DOC_ID;
 
-const host = process.env.HOST || dotenv.HOST;
-const docId = process.env.TEST_DOC_ID || dotenv.TEST_DOC_ID;
+const projectName = JSON.parse(fs.readFileSync("../.firebaserc", "utf-8"))
+  .projects.default;
 
 if (!docId) throw new Error("TEST_DOC_ID undefined");
+if (!projectName)
+  throw new Error("You need to adjust project default in .firebaserc");
 
 module.exports = {
   host: host === "remote" ? "remote" : "local",
   docId,
+  projectName,
 };

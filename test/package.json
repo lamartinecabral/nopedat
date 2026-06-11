@@ -5,7 +5,11 @@
     "test:remote": "HOST=remote jest"
   },
   "dependencies": {
+    "dotenv": "17.4.2",
     "jest": "30.3.0",
     "puppeteer": "24.40.0"
+  },
+  "devDependencies": {
+    "@types/jest": "30.0.0"
   }
 }

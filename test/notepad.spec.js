@@ -2,7 +2,7 @@
 const puppeteer = require("puppeteer");
 const child_process = require("node:child_process");
 const { expect, beforeAll, afterAll } = require("@jest/globals");
-const { docId, host } = require("./test.env");
+const { docId, host, projectName } = require("./test.env");
 
 describe(`notepad ${host} app`, () => {
   /** @type {child_process.ChildProcess} */ let server;
@@ -235,10 +235,18 @@ describe(`notepad ${host} app`, () => {
 //                UTILS
 
 const sleep = (t) => new Promise((r) => setTimeout(r, t));
-const getNote = (docId) =>
-  fetch("https://nopedat.netlify.app/api/?id=" + docId).then((a) => a.text());
-const setNote = (docId, text) =>
-  fetch("https://nopedat.netlify.app/api/?id=" + docId, {
-    method: "post",
-    body: text,
+const getNote = async (docId) => {
+  const url = `https://firestore.googleapis.com/v1/projects/${projectName}/databases/(default)/documents/docs/${docId}`;
+  const res = await fetch(url).then((a) => a.json());
+  return res?.fields?.text?.stringValue;
+};
+const setNote = (docId, text) => {
+  const url = `https://firestore.googleapis.com/v1/projects/${projectName}/databases/(default)/documents/docs/${docId}`;
+  return fetch(url + `?updateMask.fieldPaths=text`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      fields: { text: { stringValue: text } },
+    }),
+    headers: { "Content-Type": "application/json" },
   });
+};

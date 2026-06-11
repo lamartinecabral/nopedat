@@ -77,7 +77,10 @@ const getLanguage = () => {
     {
       html: () => [html(), syntaxErrorLinter],
       javascript: () => [javascript(), syntaxErrorLinter],
-      jsx: () => [javascript({ jsx: true }), syntaxErrorLinter],
+      jsx: () => [
+        javascript({ jsx: true, typescript: true }),
+        syntaxErrorLinter,
+      ],
       css: () => [css(), syntaxErrorLinter],
       cpp: () => [cpp(), syntaxErrorLinter],
       python: () => [python(), syntaxErrorLinter],
@@ -86,7 +89,7 @@ const getLanguage = () => {
         markdown({
           defaultCodeLanguage: javascript(),
         }),
-      mermaid: () => [mermaid(), syntaxErrorLinter],
+      mermaid: () => mermaid(),
     }[currentLang]?.() ?? []
   );
 };

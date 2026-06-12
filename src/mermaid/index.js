@@ -35,6 +35,8 @@ var app = {
       app.content().removeChild(child);
     }
 
+    if (!text?.trim()) return;
+
     const pre = document.createElement("pre");
     pre.className = "mermaid";
     pre.innerHTML = text;

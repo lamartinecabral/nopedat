@@ -16,7 +16,7 @@ import {
   secretName,
   remember,
 } from "./refs";
-import { getChild } from "../iuai";
+import { getChild } from "../freedom";
 import { Cache } from "../cache";
 
 export function initStateListeners() {

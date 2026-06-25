@@ -10,13 +10,13 @@ const run = () => {
     .trim()
     .split("\n");
 
-  const iuaiVersion = pkg.devDependencies.iuai;
+  const freedomVersion = pkg.devDependencies["@lamartinecabral/freedom"];
 
   for (const file of htmlFiles) {
     const content = fs.readFileSync(file).toString();
     const result = content.replace(
-      /iuai@\d+\.\d+\.\d+/g,
-      "iuai@" + iuaiVersion,
+      /@lamartinecabral\/freedom@\d+\.\d+\.\d+/g,
+      "@lamartinecabral/freedom@" + freedomVersion,
     );
     if (result !== content) fs.writeFileSync(file, result);
   }

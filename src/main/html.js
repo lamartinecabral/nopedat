@@ -27,7 +27,7 @@ import {
   app,
   code,
 } from "./refs";
-import { elem } from "../iuai";
+import { elem } from "../freedom";
 import { State } from "./state";
 import { Cache } from "../cache";
 

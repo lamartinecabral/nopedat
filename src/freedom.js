@@ -1,7 +1,7 @@
 // @ts-check
-/** @typedef {import('iuai')} */
+/** @typedef {import('@lamartinecabral/freedom')} */
 
 const { elem, getChild, getElem, getParent, queryElem, refElem, style, media } =
-  window.iuai;
+  window.freedom;
 
 export { elem, getChild, getElem, getParent, queryElem, refElem, style, media };

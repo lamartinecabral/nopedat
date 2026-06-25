@@ -2,7 +2,7 @@
 import QRCode from "qrcode/lib/browser.js";
 import { State } from "./state";
 import * as firebase from "../firebase";
-import { elem, getElem, style } from "../iuai";
+import { elem, getElem, style } from "../freedom";
 import { debounce } from "../utils";
 
 const { auth, db } = firebase.initApp(State.docId || "");

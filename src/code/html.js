@@ -26,7 +26,7 @@ import {
   preview,
   previewButton,
 } from "./refs";
-import { elem, style } from "../iuai";
+import { elem, style } from "../freedom";
 import { Languages } from "./model";
 import { State } from "./state";
 

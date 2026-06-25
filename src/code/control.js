@@ -27,7 +27,7 @@ import {
   preview,
   previewButton,
 } from "./refs";
-import { getElem, getChild, getParent } from "../iuai";
+import { getElem, getChild, getParent } from "../freedom";
 import { Html } from "./html";
 import { parseLanguage as lang } from "./model";
 import { format } from "./formatter";

@@ -4,13 +4,13 @@ import { State } from "./state";
 import { Html } from "./html";
 import * as firebase from "../firebase";
 
-/** @type {import("crytop")} */
-const Crytop = globalThis.Crytop;
+/** @type {import("@lamartinecabral/sekret")} */
+const Sekret = globalThis.Sekret;
 
 const { db } = firebase.initApp("/secret");
 
 function getDocId() {
-  return Crytop.encrypt(State.docId, State.docId).then(
+  return Sekret.encrypt(State.docId, State.docId).then(
     (cypherDocId) => "secret_" + cypherDocId.replace(/\//g, "-"),
   );
 }
@@ -29,7 +29,7 @@ export async function initDocListener() {
       const data = res.data() || { text: "" };
       if (res.metadata.hasPendingWrites) return;
       const text = await (data.text
-        ? Crytop.decrypt(data.text, State.docId)
+        ? Sekret.decrypt(data.text, State.docId)
         : "");
       State.isHidden.pub(false);
       State.status.pub("");
@@ -46,7 +46,7 @@ export async function initDocListener() {
 export const Service = class {
   static async save() {
     const [text, docId] = await Promise.all([
-      Html.text ? Crytop.encrypt(Html.text, State.docId) : "",
+      Html.text ? Sekret.encrypt(Html.text, State.docId) : "",
       getDocId(),
     ]);
     const docRef = doc(db, "docs", docId);

@@ -1,5 +1,5 @@
 // @ts-check
-import { elem, style } from "../iuai";
+import { elem, style } from "../freedom";
 import * as firebase from "../firebase";
 import { Languages } from "../code/model";
 

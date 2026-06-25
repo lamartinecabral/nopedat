@@ -1,5 +1,5 @@
 // @ts-check
-import { elem, style } from "../iuai";
+import { elem, style } from "../freedom";
 import { NoteHistory } from "../utils";
 
 const buildList = () => {
@@ -36,13 +36,13 @@ const buildList = () => {
 style("*", { fontFamily: "monospace" });
 style("table", {
   border: "0.5px solid black",
-  borderSpacing: '0',
+  borderSpacing: "0",
   margin: "1em 0",
 });
 style("td, th", { border: "0.5px solid black", padding: "8px" });
-style("button.remove", { opacity: '0' });
+style("button.remove", { opacity: "0" });
 style("tr:is(:hover, :has(:focus))", { background: "#eee" });
-style("tr:is(:hover, :has(:focus)) button.remove", { opacity: '1' });
+style("tr:is(:hover, :has(:focus)) button.remove", { opacity: "1" });
 
 function remove(id) {
   if (!confirm(`Remove entry '${id}'?`)) return;

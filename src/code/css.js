@@ -1,6 +1,6 @@
 // @ts-check
 
-import { style } from "../iuai";
+import { style } from "../freedom";
 import { assert } from "../utils";
 import {
   app,

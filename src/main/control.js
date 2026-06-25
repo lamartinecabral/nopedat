@@ -27,7 +27,7 @@ import {
   form,
   code,
 } from "./refs";
-import { getElem, getChild, getParent } from "../iuai";
+import { getElem, getChild, getParent } from "../freedom";
 import { Cache } from "../cache";
 
 export function initStateListeners() {

@@ -23,7 +23,7 @@ import {
   logout,
   app,
 } from "./refs";
-import { elem, getElem } from "../iuai";
+import { elem, getElem } from "../freedom";
 
 const elements = [
   elem(loginContainer, { className: "center", hidden: true }, [

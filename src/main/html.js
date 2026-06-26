@@ -41,13 +41,13 @@ const elements = [
   ]),
   elem(github, [
     elem("a", { href: "https://github.com/lamartinecabral/nopedat" }, [
-      elem("img", { src: "./assets/github.svg" }),
+      elem("img", { src: "./assets/gh.svg" }),
     ]),
   ]),
   elem(footer, { hidden: true }, [
     elem(code, { href: "#" }, "</>"),
     " ",
-    elem(markdown, { href: "#" }, "markdown"),
+    elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, "M⬇"),
   ]),
   elem(backdrop, { hidden: true }, [
     elem(modal, [

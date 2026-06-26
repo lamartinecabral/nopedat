@@ -5,6 +5,7 @@ import { Cache } from "../cache";
 
 export const State = {
   isIE: !!navigator.userAgent.match(/(msie |rv:)(\d+(\.?_?\d+)+)/i),
+  isMobile: window.innerWidth <= 480,
   docId: location.search.slice(1),
   public: new Subject(false),
   protected: new Subject(false),

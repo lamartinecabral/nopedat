@@ -27,8 +27,10 @@ export function initCss() {
     : ["white", "black"];
 
   style("*", {
-    fontFamily: "monospace",
+    fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
+    accentColor: "var(--accent)",
+    outlineColor: "var(--accent)",
   });
   const appRule = style(app, {
     background,
@@ -49,6 +51,7 @@ export function initCss() {
     color,
   });
   style(textarea, {
+    fontSize: "1rem",
     width: "calc(100% - 24px)",
     height: "calc(100% - 24px)",
     margin: "12px",
@@ -63,7 +66,6 @@ export function initCss() {
   });
   style(github, {
     position: "fixed",
-    background: "#fff",
     borderRadius: "50%",
     bottom: "3px",
     left: "calc(50% - 12px)",
@@ -152,22 +154,26 @@ export function initCss() {
     "--nightcolor": "#abb2bf",
     "--nightbg":
       "linear-gradient(135deg, #120c1f 0%, #080e1e 60%, #030712 100%)",
-    "--accent-light": "#007bff",
+    "--accent-light": "#0066cc",
     "--accent-text-light": "#ffffff",
-    "--accent-dark": "#007acc",
+    "--accent-dark": "#3a8dc5",
     "--accent-text-dark": "#ffffff",
+    "--hover-light": "var(--accent-light)",
+    "--hover-dark": "#ffffff",
   });
   style(".light", {
     "--background": "var(--light)",
     "--color": "var(--dark)",
     "--accent": "var(--accent-light)",
     "--accent-text": "var(--accent-text-light)",
+    "--hover": "var(--hover-light)",
   });
   style(".dark", {
     "--background": "var(--nightbg)",
     "--color": "var(--nightcolor)",
     "--accent": "var(--accent-dark)",
     "--accent-text": "var(--accent-text-dark)",
+    "--hover": "var(--hover-dark)",
   });
   !supportCssVar &&
     style(`${theme}, ${code}, ${markdown}`, {

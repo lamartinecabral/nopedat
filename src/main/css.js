@@ -129,7 +129,7 @@ export function initCss() {
     textAlign: "center",
     marginTop: "1em",
   });
-  style(`${submitButton} input`, {
+  style("button, input[type='submit']", {
     padding: "0.5rem 1rem",
     cursor: "pointer",
     background: "var(--accent)",
@@ -138,7 +138,7 @@ export function initCss() {
     borderRadius: "4px",
     fontFamily: "inherit",
   });
-  style(`${submitButton} input:hover`, {
+  style("button:hover, input[type='submit']:hover", {
     position: "relative",
     bottom: "2px",
   });

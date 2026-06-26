@@ -6,6 +6,13 @@
   "hosting": {
     "site": "notepade",
     "public": "dist",
+    "redirects": [
+      {
+        "source": "/:path*",
+        "destination": "https://nopedat.web.app/:path*",
+        "type": 301
+      }
+    ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }

@@ -101,16 +101,16 @@ export function initCss() {
     borderRadius: "2px",
     padding: "0 2px",
   });
-  !State.isMobile &&
+  if (!State.isMobile) {
     style(
       `${header} a:hover, ${footer} a:hover, ${claim} a:hover, ${resetPassword} a:hover`,
       { position: "relative", bottom: "2px" },
     );
-  !State.isMobile && style(`${header} a:hover`, { bottom: "-2px" });
-  !State.isMobile &&
+    style(`${header} a:hover`, { bottom: "-2px" });
     style(`${header} a:hover, ${footer} a:hover`, {
       color: "var(--hover)",
     });
+  }
   style(backdrop, {
     position: "fixed",
     top: "0px",

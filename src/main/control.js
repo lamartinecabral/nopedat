@@ -43,6 +43,7 @@ export function initStateListeners() {
   });
 
   State.status.sub(function (value) {
+    if (State.readonly) return;
     getChild(status.id).innerText = value;
   });
 
@@ -95,7 +96,10 @@ class Control {
       location.origin + "/account/?claim=" + State.docId;
   }
   static setReadonly() {
-    textarea().readOnly = State.public.value && !State.isLogged.value;
+    textarea().readOnly = State.readonly;
+    if (State.readonly) {
+      getChild(status.id).innerText = "READONLY";
+    }
   }
 }
 

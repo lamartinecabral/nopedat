@@ -16,6 +16,9 @@ export const State = {
   nightMode: new Subject(Cache.getNightMode()),
   showOptions: new Subject(false),
   showPassword: new Subject(false),
+  get readonly() {
+    return this.protected.value && this.public.value && !this.isLogged.value;
+  },
 };
 if (!State.docId) location.replace("?" + randomString(6));
 else {

@@ -33,6 +33,9 @@ export function initCss() {
     accentColor: "var(--accent)",
     outlineColor: "var(--accent)",
   });
+  style("*:not(textarea):not(input)", {
+    userSelect: "none",
+  });
   const appRule = style(app, {
     background,
     color,
@@ -45,7 +48,7 @@ export function initCss() {
     position: "fixed",
     textAlign: "center",
     width: "100%",
-    top: "0",
+    top: "3px",
   });
   style(status + " span", {
     background,
@@ -64,6 +67,9 @@ export function initCss() {
     background: "transparent",
     color,
     overflowAnchor: "none", // it fixes chromium's scroll anchor bug https://bugs.chromium.org/p/chromium/issues/detail?id=997266
+  });
+  style(`${textarea}:read-only`, {
+    outline: "none",
   });
   style(github, {
     position: "fixed",

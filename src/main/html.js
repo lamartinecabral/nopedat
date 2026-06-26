@@ -112,6 +112,7 @@ const elements = [
   ]),
   // @ts-ignore
   elem(textarea, {
+    placeholder: "Type your note here...",
     autofocus: true,
     autocomplete: "off",
     autocorrect: "off",

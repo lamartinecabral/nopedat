@@ -19,6 +19,7 @@ import {
   markdown,
   code,
 } from "./refs";
+import { State } from "./state";
 
 export function initCss() {
   const supportCssVar = !!window.CSS?.supports?.("color: var(--x)");
@@ -71,9 +72,10 @@ export function initCss() {
     left: "calc(50% - 12px)",
     height: "24px",
   });
-  style(`${github}:hover`, {
-    bottom: "5px",
-  });
+  !State.isMobile &&
+    style(`${github}:hover`, {
+      bottom: "5px",
+    });
   style(header, {
     position: "fixed",
     top: "4px",
@@ -90,11 +92,13 @@ export function initCss() {
     background,
     color,
   });
-  style(`${header} a:hover`, { position: "relative", top: "2px" });
-  style(`${footer} a:hover, ${claim} a:hover, ${resetPassword} a:hover`, {
-    position: "relative",
-    bottom: "2px",
-  });
+  !State.isMobile &&
+    style(`${header} a:hover`, { position: "relative", top: "2px" });
+  !State.isMobile &&
+    style(`${footer} a:hover, ${claim} a:hover, ${resetPassword} a:hover`, {
+      position: "relative",
+      bottom: "2px",
+    });
   style(backdrop, {
     position: "fixed",
     top: "0px",
@@ -140,10 +144,11 @@ export function initCss() {
     borderRadius: "4px",
     fontFamily: "inherit",
   });
-  style("button:hover, input[type='submit']:hover", {
-    position: "relative",
-    bottom: "2px",
-  });
+  !State.isMobile &&
+    style("button:hover, input[type='submit']:hover", {
+      position: "relative",
+      bottom: "2px",
+    });
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",

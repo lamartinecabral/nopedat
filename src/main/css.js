@@ -118,7 +118,7 @@ export function initCss() {
     width: "100%",
     height: "100%",
     background: "rgba(0, 0, 0, 0.6)",
-    backdropFilter: "blur(4px)",
+    backdropFilter: "blur(2px)",
     zIndex: "1",
   });
   style(modal, {

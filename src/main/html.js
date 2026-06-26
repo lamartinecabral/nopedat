@@ -47,7 +47,10 @@ const elements = [
   elem(footer, { hidden: true }, [
     elem(code, { href: "#" }, "</>"),
     " ",
-    elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, "M⬇"),
+    elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, [
+      "M",
+      elem("span", { style: { fontSize: "0.85rem" } }, "⬇"),
+    ]),
   ]),
   elem(backdrop, { hidden: true }, [
     elem(modal, [

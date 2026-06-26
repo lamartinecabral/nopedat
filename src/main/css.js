@@ -53,6 +53,7 @@ export function initCss() {
   style(status + " span", {
     background,
     color,
+    fontStyle: "italic",
   });
   style(textarea, {
     fontSize: "1rem",
@@ -73,7 +74,6 @@ export function initCss() {
   });
   style(github, {
     position: "fixed",
-    borderRadius: "50%",
     bottom: "3px",
     left: "calc(50% - 12px)",
     height: "24px",

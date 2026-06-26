@@ -28,6 +28,7 @@ export function initCss() {
 
   style("*", {
     fontFamily: "monospace",
+    boxSizing: "border-box",
   });
   const appRule = style(app, {
     background,
@@ -48,14 +49,15 @@ export function initCss() {
     color,
   });
   style(textarea, {
-    width: "calc(100% - 22px)",
-    height: "calc(100% - 22px)",
-    margin: "8px",
-    padding: "2px",
+    width: "calc(100% - 24px)",
+    height: "calc(100% - 24px)",
+    margin: "12px",
+    padding: "6px",
     border: "1px solid",
+    borderRadius: "4px",
     resize: "none",
     tabSize: "4",
-    background,
+    background: "transparent",
     color,
     overflowAnchor: "none", // it fixes chromium's scroll anchor bug https://bugs.chromium.org/p/chromium/issues/detail?id=997266
   });
@@ -67,14 +69,17 @@ export function initCss() {
     left: "calc(50% - 12px)",
     height: "24px",
   });
+  style(`${github}:hover`, {
+    bottom: "5px",
+  });
   style(header, {
     position: "fixed",
-    top: "0px",
+    top: "4px",
     right: "3em",
   });
   style(footer, {
     position: "fixed",
-    bottom: "2px",
+    bottom: "6px",
     right: "3em",
   });
   style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
@@ -83,6 +88,11 @@ export function initCss() {
     background,
     color,
   });
+  style(`${header} a:hover`, { position: "relative", top: "2px" });
+  style(`${footer} a:hover, ${claim} a:hover, ${resetPassword} a:hover`, {
+    position: "relative",
+    bottom: "2px",
+  });
   style(backdrop, {
     position: "fixed",
     top: "0px",
@@ -90,6 +100,7 @@ export function initCss() {
     width: "100%",
     height: "100%",
     background: "rgba(0, 0, 0, 0.6)",
+    backdropFilter: "blur(4px)",
     zIndex: "1",
   });
   style(modal, {
@@ -101,6 +112,7 @@ export function initCss() {
     transform: "translate(50%, 50%)",
     color,
     border: `1px solid ${color}`,
+    borderRadius: "4px",
   });
   style(optionsModal + " > div:nth-child(2)", {
     marginTop: "0.5em",
@@ -115,6 +127,20 @@ export function initCss() {
   });
   style(submitButton, {
     textAlign: "center",
+    marginTop: "1em",
+  });
+  style(`${submitButton} input`, {
+    padding: "0.5rem 1rem",
+    cursor: "pointer",
+    background: "var(--accent)",
+    color: "var(--accent-text)",
+    border: "none",
+    borderRadius: "4px",
+    fontFamily: "inherit",
+  });
+  style(`${submitButton} input:hover`, {
+    position: "relative",
+    bottom: "2px",
   });
   style(resetPassword, {
     textAlign: "center",
@@ -124,15 +150,24 @@ export function initCss() {
     "--light": "#fff",
     "--dark": "#000",
     "--nightcolor": "#abb2bf",
-    "--nightbg": "#181b20",
+    "--nightbg":
+      "linear-gradient(135deg, #120c1f 0%, #080e1e 60%, #030712 100%)",
+    "--accent-light": "#007bff",
+    "--accent-text-light": "#ffffff",
+    "--accent-dark": "#007acc",
+    "--accent-text-dark": "#ffffff",
   });
   style(".light", {
     "--background": "var(--light)",
     "--color": "var(--dark)",
+    "--accent": "var(--accent-light)",
+    "--accent-text": "var(--accent-text-light)",
   });
   style(".dark", {
     "--background": "var(--nightbg)",
     "--color": "var(--nightcolor)",
+    "--accent": "var(--accent-dark)",
+    "--accent-text": "var(--accent-text-dark)",
   });
   !supportCssVar &&
     style(`${theme}, ${code}, ${markdown}`, {

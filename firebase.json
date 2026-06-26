@@ -4,12 +4,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "nopedat",
+    "site": "notepade",
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }

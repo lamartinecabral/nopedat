@@ -77,33 +77,17 @@ export function initCss() {
     bottom: "3px",
     left: "calc(50% - 12px)",
     height: "24px",
-    transition: "transform 0.2s",
   });
-  !State.isMobile &&
-    style(`${github}:hover`, {
-      transform: "scale(1.2)",
-    });
-  style(header, {
-    position: "fixed",
-    top: "4px",
-    right: "3em",
-  });
-  style(footer, {
-    position: "fixed",
-    bottom: "4px",
-    right: "3em",
-  });
+  style(`${header}, ${footer}`, { position: "fixed", right: "3em" });
+  style(`${header} > span, ${footer} > span`, { display: "inline-block" });
+  style(`${header}`, { top: "-2px" });
+  style(`${header} > span`, { paddingTop: "6px" });
+  style(`${footer}`, { bottom: "-2px" });
+  style(`${footer} > span`, { paddingBottom: "6px" });
   style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
     cursor: "pointer",
     background,
     color,
-  });
-  style(`${header} a, ${footer} a`, {
-    bottom: "0",
-    transition: "bottom 0.2s",
-  });
-  style(`${claim} a, ${resetPassword} a`, {
-    transition: "font-size 0.2s",
   });
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
@@ -115,17 +99,6 @@ export function initCss() {
     borderRadius: "2px",
     padding: "0 2px",
   });
-  if (!State.isMobile) {
-    style(`${header} a:hover, ${footer} a:hover`, {
-      position: "relative",
-      bottom: "2px",
-    });
-    style(`${header} a:hover`, { bottom: "-2px" });
-    style(`${claim} a:hover, ${resetPassword} a:hover`, { fontSize: "1.05em" });
-    style(`${header} a:hover, ${footer} a:hover`, {
-      color: "var(--hover)",
-    });
-  }
   style(backdrop, {
     position: "fixed",
     top: "0px",
@@ -171,12 +144,7 @@ export function initCss() {
     borderRadius: "4px",
     fontFamily: "inherit",
     fontSize: "inherit",
-    transition: "transform 0.2s",
   });
-  !State.isMobile &&
-    style("button:hover, input[type='submit']:hover", {
-      transform: "scale(1.05)",
-    });
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",
@@ -217,4 +185,40 @@ export function initCss() {
     (assert(appRule).style.height = window.innerHeight + "px");
   setHeight();
   window.addEventListener("resize", setHeight);
+}
+
+export function initAnimations() {
+  if (State.isMobile) return;
+
+  style(`${github}`, { transition: "transform 0.2s" });
+  style(`${github}:hover`, { transform: "scale(1.3) translateY(-3px)" });
+
+  style(`${header}>span, ${footer}>span`, {
+    position: "relative",
+    bottom: "0",
+    transition: "bottom 0.2s",
+  });
+  style(`${footer}>span:hover`, {
+    bottom: "2px",
+  });
+  style(`${header}>span:hover`, {
+    bottom: "-2px",
+  });
+
+  style(`${header} a, ${footer} a`, {
+    transition: "color 0.2s",
+  });
+  style(`${header} a:hover, ${footer} a:hover`, {
+    color: "var(--hover)",
+  });
+
+  style(`${claim} a, ${resetPassword} a`, { transition: "font-size 0.2s" });
+  style(`${claim} a:hover, ${resetPassword} a:hover`, {
+    fontSize: "1.05em",
+  });
+
+  style("button, input[type='submit']", { transition: "transform 0.2s" });
+  style("button:hover, input[type='submit']:hover", {
+    transform: "scale(1.05)",
+  });
 }

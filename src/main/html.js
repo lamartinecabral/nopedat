@@ -34,10 +34,10 @@ import { Cache } from "../cache";
 const elements = [
   elem(status, [elem("span", "Loading...")]),
   elem(header, [
-    elem(theme, { href: "#" }, "dark"),
+    elem("span", [elem(theme, { href: "#" }, "dark")]),
     " ",
-    elem(password, { href: "#", hidden: true }, "password"),
-    elem(options, { href: "#", hidden: true }, "options"),
+    elem("span", [elem(password, { href: "#", hidden: true }, "password")]),
+    elem("span", [elem(options, { href: "#", hidden: true }, "options")]),
   ]),
   elem(github, [
     elem("a", { href: "https://github.com/lamartinecabral/nopedat" }, [
@@ -45,11 +45,13 @@ const elements = [
     ]),
   ]),
   elem(footer, { hidden: true }, [
-    elem(code, { href: "#" }, "</>"),
+    elem("span", [elem(code, { href: "#" }, "</>")]),
     " ",
-    elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, [
-      "M",
-      elem("span", { style: { fontSize: "0.85rem" } }, "⬇"),
+    elem("span", [
+      elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, [
+        "M",
+        elem("span", { style: { fontSize: "0.85rem" } }, "⬇"),
+      ]),
     ]),
   ]),
   elem(backdrop, { hidden: true }, [

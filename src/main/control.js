@@ -111,15 +111,18 @@ export function initEventListeners() {
     }
   });
 
-  theme().addEventListener("click", () => {
+  theme().addEventListener("click", (ev) => {
+    ev.preventDefault();
     State.nightMode.pub(!State.nightMode.value);
   });
 
-  password().addEventListener("click", () => {
+  password().addEventListener("click", (ev) => {
+    ev.preventDefault();
     State.showPassword.pub(true);
   });
 
-  options().addEventListener("click", () => {
+  options().addEventListener("click", (ev) => {
+    ev.preventDefault();
     State.showOptions.pub(true);
   });
 

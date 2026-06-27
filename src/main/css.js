@@ -158,16 +158,15 @@ export function initCss() {
     height: "2ch",
   });
   style(".light", {
-    "--main-bg": "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
-    "--bg": "#dfe5ef",
-    "--color": "#000",
+    "--main-bg": "#fcfcfc",
+    "--bg": "#fcfcfc",
+    "--color": "#8f8f8f",
     "--accent": "#0066cc",
-    "--hover": "#0066cc",
+    "--hover": "#000",
     "--text": "#000",
   });
   style(".dark", {
-    "--main-bg":
-      "linear-gradient(135deg, #120c1f 0%, #080e1e 60%, #030712 100%)",
+    "--main-bg": "#0a0e1e",
     "--bg": "#0b0d1e",
     "--color": "#abb2bf",
     "--accent": "#3a8dc5",

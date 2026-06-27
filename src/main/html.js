@@ -30,6 +30,7 @@ import {
 import { elem } from "../freedom";
 import { State } from "./state";
 import { Cache } from "../cache";
+import { setGithubIconColor } from "./css";
 
 const elements = [
   elem(status, [elem("span", "Loading...")]),
@@ -58,7 +59,13 @@ const elements = [
         href: "https://github.com/lamartinecabral/nopedat",
         title: "Visit GitHub repository",
       },
-      [elem("img", { src: "./assets/gh.svg" })],
+      [
+        elem("object", {
+          data: "./assets/gh.svg",
+          type: "image/svg+xml",
+          onload: setGithubIconColor,
+        }),
+      ],
     ),
   ]),
   elem(footer, { hidden: true }, [

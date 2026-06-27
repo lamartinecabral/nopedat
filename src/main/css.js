@@ -158,14 +158,14 @@ export function initCss() {
     margin: "1em 0 -1em 0",
     height: "2ch",
   });
-  style(".light", {
+  themeRules.light = style(".light", {
     "--main-bg": "#edf2fa",
     "--bg": "#ffffff",
     "--color": "#81a7e4",
     "--accent": "#0957d0",
     "--text": "#474747",
   });
-  style(".dark", {
+  themeRules.dark = style(".dark", {
     "--main-bg": "#1f2020",
     "--bg": "#282828",
     "--color": "#606060",
@@ -211,4 +211,28 @@ export function initAnimations() {
 
   style("button, input[type='submit']", transition(["transform"]));
   style(hover("button, input[type='submit']"), { transform: "scale(1.05)" });
+}
+
+/** @type {Record<string, CSSStyleRule | null>} */
+const themeRules = {
+  light: null,
+  dark: null,
+};
+
+export function setGithubIconColor() {
+  const nightMode = State.nightMode.value;
+  const cssRule = themeRules[nightMode ? "dark" : "light"];
+
+  const color = cssRule?.style.getPropertyValue(
+    nightMode ? "--main-bg" : "--accent",
+  );
+
+  if (!color) return;
+
+  const obj = github().querySelector("object");
+  const svg = obj?.contentDocument?.querySelector("svg");
+
+  if (!svg) return;
+
+  svg.style.setProperty("color", color);
 }

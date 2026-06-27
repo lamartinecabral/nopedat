@@ -42,6 +42,9 @@ export function initCss() {
   style("*:not(textarea):not(input)", {
     userSelect: "none",
   });
+  style("label", {
+    color: textColor,
+  });
   const appRule = style(app, {
     background: mainBg,
     color,

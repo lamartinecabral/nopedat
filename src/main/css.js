@@ -60,7 +60,6 @@ export function initCss() {
     background,
     color,
     fontStyle: "italic",
-    padding: "0 4px",
     borderRadius: "4px",
   });
   style(textarea, {

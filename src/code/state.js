@@ -16,7 +16,11 @@ export const State = {
   showPassword: new Subject(false),
   language: new Subject(lang(location.hash.slice(1))),
   showPreview: new Subject(false),
-  nightMode: new Subject(Cache.getNightMode()),
+  nightMode: new Subject(
+    Cache.getNightMode(
+      window.matchMedia?.("(prefers-color-scheme: dark)").matches,
+    ),
+  ),
   isMobile: new Subject(false),
 
   /** @type {string | null} */

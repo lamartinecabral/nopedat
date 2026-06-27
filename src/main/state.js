@@ -13,7 +13,11 @@ export const State = {
   isLogged: new Subject(!!Cache.getText()),
   hasOwner: new Subject(false),
   isHidden: new Subject(true),
-  nightMode: new Subject(Cache.getNightMode()),
+  nightMode: new Subject(
+    Cache.getNightMode(
+      window.matchMedia?.("(prefers-color-scheme: dark)").matches,
+    ),
+  ),
   showOptions: new Subject(false),
   showPassword: new Subject(false),
   get readonly() {

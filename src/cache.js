@@ -15,9 +15,11 @@ export const Cache = {
     else cache && cache.setItem(docId + "_text", String(val));
   },
 
-  /** @type {() => boolean} */
-  getNightMode() {
-    return (cache && cache.getItem("nightMode")) === "true";
+  /** @type {(defaultValue?: boolean) => boolean} */
+  getNightMode(defaultValue) {
+    const cacheValue = cache && cache.getItem("nightMode");
+    if (!cacheValue && defaultValue !== undefined) return defaultValue;
+    return cacheValue === "true";
   },
   /** @type {(val: boolean) => void} */
   setNightMode(val) {

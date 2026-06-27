@@ -54,7 +54,7 @@ export function initCss() {
     position: "fixed",
     textAlign: "center",
     width: "100%",
-    top: "3px",
+    top: "4px",
   });
   style(status + " span", {
     background,
@@ -190,15 +190,15 @@ export function initAnimations() {
   style(`${github}`, { transition: "transform 0.2s" });
   style(`${github}:hover`, { transform: "scale(1.3) translateY(-3px)" });
 
-  style(`${header}>span, ${footer}>span`, {
+  style(`${header} > span, ${footer} > span`, {
     position: "relative",
     bottom: "0",
     transition: "bottom 0.2s",
   });
-  style(`${footer}>span:hover`, {
+  style(`${footer} > span:hover`, {
     bottom: "2px",
   });
-  style(`${header}>span:hover`, {
+  style(`${header} > span:hover`, {
     bottom: "-2px",
   });
 

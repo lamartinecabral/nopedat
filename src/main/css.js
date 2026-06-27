@@ -187,35 +187,29 @@ export function initCss() {
 export function initAnimations() {
   if (State.isMobile) return;
 
-  style(`${github}`, { transition: "transform 0.2s" });
-  style(`${github}:hover`, { transform: "scale(1.3) translateY(-3px)" });
+  const strMap = (str, sep, fn) => String(str).split(sep).map(fn).join(sep);
+  const hover = (selectors) => strMap(selectors, ",", (s) => `${s}:hover`);
+  const transition = (props = []) => ({
+    transition: props.map((p) => `${p} 0.2s`).join(", "),
+  });
+
+  style(github, transition(["transform"]));
+  style(hover(github), { transform: "scale(1.3) translateY(-3px)" });
 
   style(`${header} > span, ${footer} > span`, {
     position: "relative",
     bottom: "0",
-    transition: "bottom 0.2s",
+    ...transition(["bottom"]),
   });
-  style(`${footer} > span:hover`, {
-    bottom: "2px",
-  });
-  style(`${header} > span:hover`, {
-    bottom: "-2px",
-  });
+  style(hover(`${footer} > span`), { bottom: "2px" });
+  style(hover(`${header} > span`), { bottom: "-2px" });
 
-  style(`${header} a, ${footer} a`, {
-    transition: "color 0.2s",
-  });
-  style(`${header} a:hover, ${footer} a:hover`, {
-    color: "var(--hover)",
-  });
+  style(`${header} a, ${footer} a`, transition(["color"]));
+  style(hover(`${header} a, ${footer} a`), { color: "var(--hover)" });
 
-  style(`${claim} a, ${resetPassword} a`, { transition: "font-size 0.2s" });
-  style(`${claim} a:hover, ${resetPassword} a:hover`, {
-    fontSize: "1.05em",
-  });
+  style(`${claim} a, ${resetPassword} a`, transition(["font-size"]));
+  style(hover(`${claim} a, ${resetPassword} a`), { fontSize: "1.05em" });
 
-  style("button, input[type='submit']", { transition: "transform 0.2s" });
-  style("button:hover, input[type='submit']:hover", {
-    transform: "scale(1.05)",
-  });
+  style("button, input[type='submit']", transition(["transform"]));
+  style(hover("button, input[type='submit']"), { transform: "scale(1.05)" });
 }

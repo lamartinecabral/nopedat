@@ -74,7 +74,14 @@ const elements = [
           style: { paddingLeft: "4px" },
           title: "View note as markdown",
         },
-        ["M", elem("span", { style: { fontSize: "0.85rem" } }, "⬇")],
+        [
+          "M",
+          elem(
+            "span",
+            { style: { fontSize: "1.35rem", lineHeight: "0" } },
+            "↓",
+          ),
+        ],
       ),
     ]),
   ]),

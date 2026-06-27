@@ -84,7 +84,7 @@ export function initCss() {
     left: "calc(50% - 12px)",
     height: "24px",
   });
-  style(`${header}, ${footer}`, { position: "fixed", right: "3em" });
+  style(`${header}, ${footer}`, { position: "fixed", right: "24px" });
   style(`${header} > span, ${footer} > span`, { display: "inline-block" });
   style(`${header}`, { top: "-2px" });
   style(`${header} > span`, { paddingTop: "6px" });

@@ -73,7 +73,7 @@ export function initCss() {
     borderRadius: "4px",
     resize: "none",
     tabSize: "4",
-    background: "transparent",
+    background,
     color: textColor,
     overflowAnchor: "none", // it fixes chromium's scroll anchor bug https://bugs.chromium.org/p/chromium/issues/detail?id=997266
   });
@@ -160,20 +160,18 @@ export function initCss() {
     height: "2ch",
   });
   style(".light", {
-    "--main-bg": "#fcfcfc",
-    "--bg": "#fcfcfc",
-    "--color": "#8f8f8f",
-    "--accent": "#0066cc",
-    "--hover": "#000",
-    "--text": "#000",
+    "--main-bg": "#edf2fa",
+    "--bg": "#ffffff",
+    "--color": "#81a7e4",
+    "--accent": "#0957d0",
+    "--text": "#474747",
   });
   style(".dark", {
-    "--main-bg": "#0a0e1e",
-    "--bg": "#0b0d1e",
-    "--color": "#abb2bf",
+    "--main-bg": "#1f2020",
+    "--bg": "#282828",
+    "--color": "#606060",
     "--accent": "#3a8dc5",
-    "--hover": "#fff",
-    "--text": "#abb2bf",
+    "--text": "#fff",
   });
   !supportCssVar &&
     style(`${theme}, ${code}, ${markdown}`, {
@@ -207,7 +205,7 @@ export function initAnimations() {
   style(hover(`${header} > span`), { bottom: "-2px" });
 
   style(`${header} a, ${footer} a`, transition(["color"]));
-  style(hover(`${header} a, ${footer} a`), { color: "var(--hover)" });
+  style(hover(`${header} a, ${footer} a`), { color: "var(--text)" });
 
   style(`${claim} a, ${resetPassword} a`, transition(["font-size"]));
   style(hover(`${claim} a, ${resetPassword} a`), { fontSize: "1.05em" });

@@ -23,21 +23,27 @@ import { State } from "./state";
 
 export function initCss() {
   const supportCssVar = !!window.CSS?.supports?.("color: var(--x)");
-  const [background, color] = supportCssVar
-    ? ["var(--background)", "var(--color)"]
-    : ["white", "black"];
+  const [background, mainBg, color, accentColor, textColor] = supportCssVar
+    ? [
+        "var(--bg)",
+        "var(--main-bg)",
+        "var(--color)",
+        "var(--accent)",
+        "var(--text)",
+      ]
+    : ["white", "white", "black", "#06c", "black"];
 
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
-    accentColor: "var(--accent)",
-    outlineColor: "var(--accent)",
+    accentColor,
+    outlineColor: accentColor,
   });
   style("*:not(textarea):not(input)", {
     userSelect: "none",
   });
   const appRule = style(app, {
-    background,
+    background: mainBg,
     color,
     margin: "0",
     padding: "0",
@@ -61,12 +67,12 @@ export function initCss() {
     height: "calc(100% - 24px)",
     margin: "12px",
     padding: "6px",
-    border: "1px solid",
+    border: `1px solid ${color}`,
     borderRadius: "4px",
     resize: "none",
     tabSize: "4",
     background: "transparent",
-    color,
+    color: textColor,
     overflowAnchor: "none", // it fixes chromium's scroll anchor bug https://bugs.chromium.org/p/chromium/issues/detail?id=997266
   });
   style(`${textarea}:read-only`, {
@@ -91,7 +97,7 @@ export function initCss() {
   });
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
-    color: "var(--accent)",
+    color: accentColor,
   });
   style(`${header} a, ${footer} a`, {
     textDecoration: "none",
@@ -130,6 +136,7 @@ export function initCss() {
   style(claim, {
     textAlign: "center",
     marginBottom: "1em",
+    height: "2ch",
   });
   style(submitButton, {
     textAlign: "center",
@@ -138,8 +145,8 @@ export function initCss() {
   style("button, input[type='submit']", {
     padding: "0.5rem 1rem",
     cursor: "pointer",
-    background: "var(--accent)",
-    color: "var(--accent-text)",
+    background: accentColor,
+    color: "#fff",
     border: "none",
     borderRadius: "4px",
     fontFamily: "inherit",
@@ -148,33 +155,24 @@ export function initCss() {
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",
-  });
-  style(":root", {
-    "--light": "#fff",
-    "--dark": "#000",
-    "--nightcolor": "#abb2bf",
-    "--nightbg":
-      "linear-gradient(135deg, #120c1f 0%, #080e1e 60%, #030712 100%)",
-    "--accent-light": "#0066cc",
-    "--accent-text-light": "#ffffff",
-    "--accent-dark": "#3a8dc5",
-    "--accent-text-dark": "#ffffff",
-    "--hover-light": "var(--accent-light)",
-    "--hover-dark": "#ffffff",
+    height: "2ch",
   });
   style(".light", {
-    "--background": "var(--light)",
-    "--color": "var(--dark)",
-    "--accent": "var(--accent-light)",
-    "--accent-text": "var(--accent-text-light)",
-    "--hover": "var(--hover-light)",
+    "--main-bg": "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+    "--bg": "#dfe5ef",
+    "--color": "#000",
+    "--accent": "#0066cc",
+    "--hover": "#0066cc",
+    "--text": "#000",
   });
   style(".dark", {
-    "--background": "var(--nightbg)",
-    "--color": "var(--nightcolor)",
-    "--accent": "var(--accent-dark)",
-    "--accent-text": "var(--accent-text-dark)",
-    "--hover": "var(--hover-dark)",
+    "--main-bg":
+      "linear-gradient(135deg, #120c1f 0%, #080e1e 60%, #030712 100%)",
+    "--bg": "#0b0d1e",
+    "--color": "#abb2bf",
+    "--accent": "#3a8dc5",
+    "--hover": "#fff",
+    "--text": "#abb2bf",
   });
   !supportCssVar &&
     style(`${theme}, ${code}, ${markdown}`, {

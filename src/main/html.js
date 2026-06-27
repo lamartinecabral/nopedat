@@ -34,24 +34,48 @@ import { Cache } from "../cache";
 const elements = [
   elem(status, [elem("span", "Loading...")]),
   elem(header, [
-    elem("span", [elem(theme, { href: "#" }, "dark")]),
-    " ",
-    elem("span", [elem(password, { href: "#", hidden: true }, "password")]),
-    elem("span", [elem(options, { href: "#", hidden: true }, "options")]),
-  ]),
-  elem(github, [
-    elem("a", { href: "https://github.com/lamartinecabral/nopedat" }, [
-      elem("img", { src: "./assets/gh.svg" }),
-    ]),
-  ]),
-  elem(footer, { hidden: true }, [
-    elem("span", [elem(code, { href: "#" }, "</>")]),
+    elem("span", [elem(theme, { href: "#", title: "Toggle theme" }, "dark")]),
     " ",
     elem("span", [
-      elem(markdown, { href: "#", style: { paddingLeft: "4px" } }, [
-        "M",
-        elem("span", { style: { fontSize: "0.85rem" } }, "⬇"),
-      ]),
+      elem(
+        password,
+        { href: "#", hidden: true, title: "Enter or add a password" },
+        "password",
+      ),
+    ]),
+    elem("span", [
+      elem(
+        options,
+        { href: "#", hidden: true, title: "View options" },
+        "options",
+      ),
+    ]),
+  ]),
+  elem(github, [
+    elem(
+      "a",
+      {
+        href: "https://github.com/lamartinecabral/nopedat",
+        title: "Visit GitHub repository",
+      },
+      [elem("img", { src: "./assets/gh.svg" })],
+    ),
+  ]),
+  elem(footer, { hidden: true }, [
+    elem("span", [
+      elem(code, { href: "#", title: "Go to code editor" }, "</>"),
+    ]),
+    " ",
+    elem("span", [
+      elem(
+        markdown,
+        {
+          href: "#",
+          style: { paddingLeft: "4px" },
+          title: "View note as markdown",
+        },
+        ["M", elem("span", { style: { fontSize: "0.85rem" } }, "⬇")],
+      ),
     ]),
   ]),
   elem(backdrop, { hidden: true }, [
@@ -78,7 +102,17 @@ const elements = [
         elem("div", [elem(logout, "logout")]),
       ]),
       elem(passwordModal, { hidden: true }, [
-        elem(claim, { hidden: true }, [elem("a", "claim this note")]),
+        elem(claim, { hidden: true }, [
+          elem(
+            "a",
+            {
+              href: "#",
+              title:
+                "If you have an account, you can claim and protect this note",
+            },
+            "claim this note",
+          ),
+        ]),
         elem(form, [
           elem("table", [
             elem(email, { hidden: true }, [

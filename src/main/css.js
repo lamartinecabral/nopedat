@@ -194,6 +194,7 @@ export function initAnimations() {
   const transition = (props = []) => ({
     transition: props.map((p) => `${p} 0.2s`).join(", "),
   });
+  const darken = (value) => `hsl(from ${value} h s calc(l - 15))`;
 
   style(github, { cursor: "pointer", ...transition(["transform"]) });
   style(`${github} object`, { pointerEvents: "none" });
@@ -210,11 +211,13 @@ export function initAnimations() {
   style(`${header} a, ${footer} a`, transition(["color"]));
   style(hover(`${header} a, ${footer} a`), { color: "var(--text)" });
 
-  style(`${claim} a, ${resetPassword} a`, transition(["font-size"]));
-  style(hover(`${claim} a, ${resetPassword} a`), { fontSize: "1.05em" });
+  style(hover(`${claim} a, ${resetPassword} a`), {
+    color: darken("var(--accent)"),
+  });
 
-  style("button, input[type='submit']", transition(["transform"]));
-  style(hover("button, input[type='submit']"), { transform: "scale(1.05)" });
+  style(hover("button, input[type='submit']"), {
+    background: darken("var(--accent)"),
+  });
 }
 
 /** @type {Record<string, CSSStyleRule | null>} */

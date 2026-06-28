@@ -195,7 +195,8 @@ export function initAnimations() {
     transition: props.map((p) => `${p} 0.2s`).join(", "),
   });
 
-  style(github, transition(["transform"]));
+  style(github, { cursor: "pointer", ...transition(["transform"]) });
+  style(`${github} object`, { pointerEvents: "none" });
   style(hover(github), { transform: "scale(1.3) translateY(-3px)" });
 
   style(`${header} > span, ${footer} > span`, {

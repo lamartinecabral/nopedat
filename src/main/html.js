@@ -61,6 +61,7 @@ const elements = [
       },
       [
         elem("object", {
+          tabIndex: -1,
           data: "./assets/gh.svg",
           type: "image/svg+xml",
           onload: setGithubIconColor,

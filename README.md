@@ -16,6 +16,11 @@ Create a unique space instantly by adding an identifier to the URL:
 * **Optional Security:** Keep it open for collaboration or lock it down with a password.
 * **Cross-Device Sync:** Powered by Firebase for real-time updates.
 
+## 🛠️ API Documentation
+The core functionality is powered by a dedicated API:
+* **Source Repository:** [nopedat-api on GitHub](https://github.com/lamartinecabral/nopedat-api)
+* **Live Endpoint:** `https://nopedat.netlify.app`
+
 ---
 
 ### ⚠️ Security & Privacy

@@ -2,38 +2,38 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /docs/{docId} {
+      // RULE 1 - a doc is allowed to have only the following fields:
+      //   text:       string   (required)
+      //   protected:  string   (optional)
+      //   public:     boolean  (optional)
+      // RULE 2 - only one field is allowed to be changed per operation
+      // RULE 3 - if protected does not exists, everyone can read/write
+      // RULE 4 - if protected == auth.uid, logged user can read/write
+      // RULE 5 - if public == true, everyone can read
+
       allow create: if
         request.resource.data.keys() == ['text'] &&
         request.resource.data.text is string;
       allow update: if
-        // RULE 1 - a doc is allowed to have only the following fields:
-        //   text:       string   (required)
-        //   protected:  string   (optional)
-        //   public:     boolean  (optional)
-        // RULE 2 - only one field is allowed to be changed per operation
-        // RULE 3 - if protected does not exists, everyone can read/write
-        // RULE 4 - if protected == auth.uid, logged user can read/write
-        // RULE 5 - if public == true, everyone can read
         !exists(request.path) ||
-        affectedKeys().size() == 0 ||
+        affectedKeys().size() == 0;
+      allow update: if
+        changedKeys() == ['text'].toSet() &&
+        request.resource.data.text is string &&
         (
-          changedKeys() == ['text'].toSet() &&
-          request.resource.data.text is string &&
-          (
-            !('protected' in resource.data.keys()) ||
-            uidEqual(resource.data.protected)
-          )
-        ) || (
-          addedKeys() == ['protected'].toSet() &&
-          uidEqual(request.resource.data.protected) &&
-          ( !hasOwner(docId) || isOwner(docId) )
-        ) || (
-          removedKeys() == ['protected'].toSet() &&
-          uidEqual(resource.data.protected)
-        ) || (
-          affectedKeys() == ['public'].toSet() &&
+          !('protected' in resource.data.keys()) ||
           uidEqual(resource.data.protected)
         );
+      allow update: if
+        addedKeys() == ['protected'].toSet() &&
+        uidEqual(request.resource.data.protected) &&
+        ( !hasOwner(docId) || isOwner(docId) );
+      allow update: if
+        removedKeys() == ['protected'].toSet() &&
+        uidEqual(resource.data.protected);
+      allow update: if
+        affectedKeys() == ['public'].toSet() &&
+        uidEqual(resource.data.protected);
       allow get: if
         !exists(request.path) ||
         !('protected' in resource.data) ||

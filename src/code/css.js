@@ -20,25 +20,23 @@ import * as State from "./state";
 
 export function initCss() {
   style("*", {
-    fontFamily: "monospace",
+    fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
+    boxSizing: "border-box",
   });
-  style(app, {
+  const appRule = style(app, {
     display: "flex",
     margin: "0",
-    padding: "8px",
-    gap: "8px",
     background: "var(--background)",
     color: "var(--color)",
+    height: "100vh",
   });
-  style(`${app} > div`, {
+  style("main", {
+    height: "calc(100% - 24px)",
+    width: "calc(100% - 24px)",
+    margin: "12px",
+  });
+  style(editor, {
     height: "100%",
-    marginTop: "-8px",
-  });
-  style(`${app} > div:not(.split)`, {
-    width: "100%",
-  });
-  const editorRule = style(editor, {
-    height: "calc(calc(100vh - 8px) - 1rem)",
     scrollbarColor: "var(--color) transparent",
   });
   style(status, {
@@ -54,8 +52,10 @@ export function initCss() {
   });
   style(header, {
     textAlign: "end",
-    position: "relative",
-    height: "1rem",
+    position: "fixed",
+    width: "inherit",
+    top: "0px",
+    left: "0px",
     zIndex: "15",
   });
   style(`${header} a, ${claim} a, ${resetPassword} a`, {
@@ -121,26 +121,27 @@ export function initCss() {
     "--background": "var(--nightbg)",
     "--color": "var(--nightcolor)",
   });
-  style(".split", {
+  style("main.split", {
     width: "var(--splitsize)",
     resize: "horizontal",
     overflow: "auto",
+    marginRight: "0px",
   });
   style(preview, {
     display: "none",
   });
-  style(`.split + ${preview}`, {
+  style(`main.split + ${preview}`, {
     display: "unset",
     flexGrow: "1",
     width: "0",
+    margin: "12px",
     boxSizing: "border-box",
     background: "#fff",
   });
 
   const resizeListener = () => {
     State.State.isMobile.pub(window.innerWidth <= 480);
-    assert(editorRule).style.height =
-      `calc(${window.innerHeight - 8}px - 1rem)`;
+    assert(appRule).style.height = `${window.innerHeight}px`;
   };
   resizeListener();
   window.addEventListener("resize", resizeListener);

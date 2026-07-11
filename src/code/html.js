@@ -46,7 +46,7 @@ const btn = (() => {
 })();
 
 const elements = [
-  elem("div", [
+  elem("main", [
     elem(status, [elem("span", "Loading...")]),
     elem(header, [
       elem(langSelect, [

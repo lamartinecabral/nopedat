@@ -16,17 +16,19 @@ import {
   editor,
   preview,
 } from "./refs";
-import * as State from "./state";
+import { State } from "./state";
 
 export function initCss() {
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
+    accentColor: "var(--accent)",
+    outlineColor: "var(--accent)",
   });
   const appRule = style(app, {
     display: "flex",
     margin: "0",
-    background: "var(--background)",
+    background: "var(--main-bg)",
     color: "var(--color)",
     height: "100vh",
   });
@@ -38,31 +40,49 @@ export function initCss() {
   style(editor, {
     height: "100%",
     scrollbarColor: "var(--color) transparent",
+    color: "var(--text)",
+    background: "var(--bg)",
+    border: `1px solid var(--color)`,
+    borderRadius: "4px",
+    overflow: "auto",
   });
   style(status, {
     position: "fixed",
     textAlign: "center",
     width: "100%",
-    top: "0",
+    top: "4px",
     zIndex: "10",
   });
   style(status + " span", {
-    background: "var(--background)",
+    background: "var(--bg)",
     color: "var(--color)",
+    fontStyle: "italic",
+    borderRadius: "4px",
   });
   style(header, {
-    textAlign: "end",
     position: "fixed",
     width: "inherit",
-    top: "0px",
+    top: "3px",
     left: "0px",
     zIndex: "15",
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: "10px",
   });
-  style(`${header} a, ${claim} a, ${resetPassword} a`, {
-    textDecoration: "underline",
+  style(`${header} a, ${header} select, ${claim} a, ${resetPassword} a`, {
     cursor: "pointer",
-    background: "var(--background)",
+    background: "var(--bg)",
     color: "var(--color)",
+  });
+  style(`${claim} a, ${resetPassword} a`, {
+    textDecoration: "underline",
+    color: "var(--accent)",
+  });
+  style(`${header} a`, {
+    textDecoration: "none",
+    border: "1px solid",
+    borderRadius: "2px",
+    padding: "0 2px",
   });
   style(backdrop, {
     position: "fixed",
@@ -70,18 +90,20 @@ export function initCss() {
     left: "0px",
     width: "100%",
     height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    zIndex: "15",
+    background: "rgba(0, 0, 0, 0.5)",
+    backdropFilter: "blur(4px)",
+    zIndex: "20",
   });
   style(modal, {
-    background: "var(--background)",
+    background: "var(--bg)",
     padding: "2em",
     position: "absolute",
-    bottom: "50%",
-    right: "50%",
-    transform: "translate(50%, 50%)",
+    top: "min(50%, 50vw)",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     color: "var(--color)",
-    border: "1px solid var(--color)",
+    border: `1px solid var(--color)`,
+    borderRadius: "4px",
   });
   style(optionsModal + " > div:nth-child(2)", {
     marginTop: "0.5em",
@@ -90,21 +112,39 @@ export function initCss() {
     marginTop: "1em",
     textAlign: "center",
   });
+  style(`${claim} a, ${resetPassword} a`, {
+    textDecoration: "underline",
+    color: "var(--accent)",
+  });
   style(claim, {
     textAlign: "center",
     marginBottom: "1em",
+    height: "2ch",
   });
   style(submitButton, {
     textAlign: "center",
+    marginTop: "1em",
+  });
+  style("button, input[type='submit']", {
+    padding: "0.5rem 1rem",
+    cursor: "pointer",
+    background: "var(--accent)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    fontFamily: "inherit",
+    fontSize: "inherit",
   });
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",
+    height: "2ch",
   });
   style(langSelect, {
-    fontSize: "0.9rem",
-    background: "var(--background)",
+    border: "1px solid",
+    borderRadius: "2px",
     color: "var(--color)",
+    background: "var(--bg)",
   });
   style(":root", {
     "--light": "#fff",
@@ -115,11 +155,25 @@ export function initCss() {
   });
   style(".light", {
     "--background": "var(--light)",
-    "--color": "var(--dark)",
+    // "--color": "var(--dark)",
   });
   style(".dark", {
     "--background": "var(--nightbg)",
-    "--color": "var(--nightcolor)",
+    // "--color": "var(--nightcolor)",
+  });
+  style(".light", {
+    "--main-bg": "#edf2fa",
+    "--bg": "#ffffff",
+    "--color": "#81a7e4",
+    "--accent": "#0957d0",
+    "--text": "#474747",
+  });
+  style(".dark", {
+    "--main-bg": "#1f2020",
+    "--bg": "#282828",
+    "--color": "#606060",
+    "--accent": "#3a8dc5",
+    "--text": "#fff",
   });
   style("main.split", {
     width: "var(--splitsize)",
@@ -138,11 +192,36 @@ export function initCss() {
     boxSizing: "border-box",
     background: "#fff",
   });
+  style(".cm-editor", {
+    backgroundColor: "var(--bg)",
+  });
 
   const resizeListener = () => {
-    State.State.isMobile.pub(window.innerWidth <= 480);
+    State.isMobile.pub(window.innerWidth <= 480);
     assert(appRule).style.height = `${window.innerHeight}px`;
   };
   resizeListener();
   window.addEventListener("resize", resizeListener);
+}
+
+export function initAnimations() {
+  if (State.isMobile.value) return;
+
+  const strMap = (str, sep, fn) => String(str).split(sep).map(fn).join(sep);
+  const hover = (selectors) => strMap(selectors, ",", (s) => `${s}:hover`);
+  const transition = (props = []) => ({
+    transition: props.map((p) => `${p} 0.2s`).join(", "),
+  });
+  const darken = (value) => `hsl(from ${value} h s calc(l - 15))`;
+
+  style(`${header} a, ${header} select`, transition(["color"]));
+  style(hover(`${header} a, ${header} select`), { color: "var(--text)" });
+
+  style(hover(`${claim} a, ${resetPassword} a`), {
+    color: darken("var(--accent)"),
+  });
+
+  style(hover("button, input[type='submit']"), {
+    background: darken("var(--accent)"),
+  });
 }

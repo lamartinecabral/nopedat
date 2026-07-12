@@ -26,24 +26,12 @@ import {
   preview,
   previewButton,
 } from "./refs";
-import { elem, style } from "../freedom";
+import { elem } from "../freedom";
 import { Languages } from "./model";
 import { State } from "./state";
 
 /** @type {import('../codemirror/codemirror')} */
 const Editor = window.codemirror;
-
-const btn = (() => {
-  style(".btn", {
-    cursor: "pointer",
-    textDecoration: "underline",
-    background: "var(--background)",
-  });
-  return (attributes, children) => {
-    const className = "btn " + (attributes.className || "");
-    return elem("span", { ...attributes, className, tabindex: "0" }, children);
-  };
-})();
 
 const elements = [
   elem("main", [
@@ -86,8 +74,8 @@ const elements = [
         "preview",
       ),
       " ",
-      btn({ id: password.id, hidden: true }, "password"),
-      btn({ id: options.id, hidden: true }, "options"),
+      elem(password, { hidden: true, href: "#" }, "password"),
+      elem(options, { hidden: true, href: "#" }, "options"),
     ]),
     elem(backdrop, { hidden: true }, [
       elem(modal, [
@@ -113,7 +101,17 @@ const elements = [
           elem("div", [elem(logout, "logout")]),
         ]),
         elem(passwordModal, { hidden: true }, [
-          elem(claim, { hidden: true }, [elem("a", "claim this note")]),
+          elem(claim, { hidden: true }, [
+            elem(
+              "a",
+              {
+                href: "#",
+                title:
+                  "If you have an account, you can claim and protect this note",
+              },
+              "claim this note",
+            ),
+          ]),
           elem(form, [
             elem("table", [
               elem(email, { hidden: true }, [
@@ -143,7 +141,9 @@ const elements = [
             elem(submitButton, [
               elem("input", { type: "submit", value: "Submit" }),
             ]),
-            elem(resetPassword, { hidden: true }, [btn({}, "reset password")]),
+            elem(resetPassword, { hidden: true }, [
+              elem("a", { href: "#" }, "reset password"),
+            ]),
           ]),
         ]),
       ]),

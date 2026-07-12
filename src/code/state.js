@@ -21,10 +21,14 @@ export const State = {
       window.matchMedia?.("(prefers-color-scheme: dark)").matches,
     ),
   ),
-  isMobile: new Subject(false),
+  isMobile: new Subject(window.innerWidth <= 480),
 
   /** @type {string | null} */
   lastLoadedText: null,
+
+  get readonly() {
+    return this.protected.value && this.public.value && !this.isLogged.value;
+  },
 };
 if (!State.docId) location.replace("?" + randomString(6));
 else {

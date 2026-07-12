@@ -50,6 +50,7 @@ export function initStateListeners() {
   });
 
   State.status.sub(function (value) {
+    if (State.readonly) return;
     getChild(status.id).innerText = value;
   });
 
@@ -125,7 +126,10 @@ class Control {
       location.origin + "/account/?claim=" + State.docId;
   }
   static setReadonly() {
-    Editor.setReadonly(State.public.value && !State.isLogged.value);
+    Editor.setReadonly(State.readonly);
+    if (State.readonly) {
+      getChild(status.id).innerText = "READONLY";
+    }
   }
 
   static setPlayButton() {
@@ -193,11 +197,13 @@ export function initEventListeners() {
     }
   });
 
-  password().addEventListener("click", () => {
+  password().addEventListener("click", (ev) => {
+    ev.preventDefault();
     State.showPassword.pub(true);
   });
 
-  options().addEventListener("click", () => {
+  options().addEventListener("click", (ev) => {
+    ev.preventDefault();
     State.showOptions.pub(true);
   });
 

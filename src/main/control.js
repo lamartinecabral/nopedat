@@ -101,6 +101,8 @@ class Control {
     textarea().readOnly = State.readonly;
     if (State.readonly) {
       getChild(status.id).innerText = "READONLY";
+    } else if (getChild(status.id).innerText === "READONLY") {
+      getChild(status.id).innerText = "";
     }
   }
 }

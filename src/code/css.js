@@ -15,6 +15,7 @@ import {
   langSelect,
   editor,
   preview,
+  footer,
 } from "./refs";
 import { State } from "./state";
 
@@ -59,26 +60,34 @@ export function initCss() {
     fontStyle: "italic",
     borderRadius: "4px",
   });
-  style(header, {
+  style(`${header}, ${footer}`, {
     position: "fixed",
     width: "inherit",
-    top: "3px",
     left: "0px",
     zIndex: "15",
     display: "flex",
     justifyContent: "flex-end",
     gap: "10px",
   });
-  style(`${header} a, ${header} select, ${claim} a, ${resetPassword} a`, {
-    cursor: "pointer",
-    background: "var(--bg)",
-    color: "var(--color)",
+  style(`${header}`, {
+    top: "3px",
   });
+  style(`${footer}`, {
+    bottom: "4px",
+  });
+  style(
+    `${header} a, ${header} select, ${footer} a, ${claim} a, ${resetPassword} a`,
+    {
+      cursor: "pointer",
+      background: "var(--bg)",
+      color: "var(--color)",
+    },
+  );
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
     color: "var(--accent)",
   });
-  style(`${header} a`, {
+  style(`${header} a, ${footer} a`, {
     textDecoration: "none",
     border: "1px solid",
     borderRadius: "2px",
@@ -214,8 +223,10 @@ export function initAnimations() {
   });
   const darken = (value) => `hsl(from ${value} h s calc(l - 15))`;
 
-  style(`${header} a, ${header} select`, transition(["color"]));
-  style(hover(`${header} a, ${header} select`), { color: "var(--text)" });
+  style(`${header} a, ${header} select, ${footer} a`, transition(["color"]));
+  style(hover(`${header} a, ${header} select, ${footer} a`), {
+    color: "var(--text)",
+  });
 
   style(hover(`${claim} a, ${resetPassword} a`), {
     color: darken("var(--accent)"),

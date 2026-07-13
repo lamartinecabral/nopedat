@@ -93,7 +93,7 @@ export function initCss() {
   style(`${header}`, { top: "-2px" });
   style(`${header} > span`, { paddingTop: "6px" });
   style(`${footer}`, { bottom: "-2px" });
-  style(`${footer} > span`, { paddingBottom: "6px" });
+  style(`${footer} > span`, { paddingBottom: "7px" });
   style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
     cursor: "pointer",
     background,

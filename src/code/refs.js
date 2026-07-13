@@ -8,11 +8,12 @@ export const header = refElem("div");
 export const password = refElem("a");
 export const options = refElem("a");
 export const play = refElem("a");
-export const editor = refElem("div");
 export const claim = refElem("div");
 export const langSelect = refElem("select");
+export const footer = refElem("div");
 export const preview = refElem("iframe");
 export const previewButton = refElem("a");
+export const editor = refElem("div");
 
 export const backdrop = refElem("div");
 export const modal = refElem("div");

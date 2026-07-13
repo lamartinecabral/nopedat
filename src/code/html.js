@@ -25,6 +25,7 @@ import {
   langSelect,
   preview,
   previewButton,
+  footer,
 } from "./refs";
 import { elem } from "../freedom";
 import { Languages } from "./model";
@@ -55,6 +56,10 @@ const elements = [
         ]),
       ]),
       " ",
+      elem(password, { hidden: true, href: "#" }, "password"),
+      elem(options, { hidden: true, href: "#" }, "options"),
+    ]),
+    elem(footer, { hidden: true }, [
       elem(
         play,
         {
@@ -73,9 +78,6 @@ const elements = [
         },
         "preview",
       ),
-      " ",
-      elem(password, { hidden: true, href: "#" }, "password"),
-      elem(options, { hidden: true, href: "#" }, "options"),
     ]),
     elem(backdrop, { hidden: true }, [
       elem(modal, [

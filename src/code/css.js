@@ -26,6 +26,9 @@ export function initCss() {
     accentColor: "var(--accent)",
     outlineColor: "var(--accent)",
   });
+  style("label", {
+    color: "var(--text)",
+  });
   const appRule = style(app, {
     display: "flex",
     margin: "0",

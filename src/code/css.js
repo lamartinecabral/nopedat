@@ -166,14 +166,6 @@ export function initCss() {
     "--splitsize": "60vw",
   });
   style(".light", {
-    "--background": "var(--light)",
-    // "--color": "var(--dark)",
-  });
-  style(".dark", {
-    "--background": "var(--nightbg)",
-    // "--color": "var(--nightcolor)",
-  });
-  style(".light", {
     "--main-bg": "#edf2fa",
     "--bg": "#ffffff",
     "--color": "#81a7e4",

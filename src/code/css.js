@@ -18,22 +18,23 @@ import {
   footer,
 } from "./refs";
 import { State } from "./state";
+import { vars, darkTheme, lightTheme } from "../theme";
 
 export function initCss() {
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
-    accentColor: "var(--accent)",
-    outlineColor: "var(--accent)",
+    accentColor: vars.accent,
+    outlineColor: vars.accent,
   });
   style("label", {
-    color: "var(--text)",
+    color: vars.text,
   });
   const appRule = style(app, {
     display: "flex",
     margin: "0",
-    background: "var(--main-bg)",
-    color: "var(--color)",
+    background: vars.mainBg,
+    color: vars.color,
     height: "100vh",
   });
   style("main", {
@@ -43,10 +44,10 @@ export function initCss() {
   });
   style(editor, {
     height: "100%",
-    scrollbarColor: "var(--color) transparent",
-    color: "var(--text)",
-    background: "var(--bg)",
-    border: `1px solid var(--color)`,
+    scrollbarColor: `${vars.color} transparent`,
+    color: vars.text,
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
     overflow: "auto",
   });
@@ -58,8 +59,8 @@ export function initCss() {
     zIndex: "10",
   });
   style(status + " span", {
-    background: "var(--bg)",
-    color: "var(--color)",
+    background: vars.bg,
+    color: vars.color,
     fontStyle: "italic",
     borderRadius: "4px",
   });
@@ -82,13 +83,13 @@ export function initCss() {
     `${header} a, ${header} select, ${footer} a, ${claim} a, ${resetPassword} a`,
     {
       cursor: "pointer",
-      background: "var(--bg)",
-      color: "var(--color)",
+      background: vars.bg,
+      color: vars.color,
     },
   );
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
-    color: "var(--accent)",
+    color: vars.accent,
   });
   style(`${header} a, ${footer} a`, {
     textDecoration: "none",
@@ -107,14 +108,14 @@ export function initCss() {
     zIndex: "20",
   });
   style(modal, {
-    background: "var(--bg)",
+    background: vars.bg,
     padding: "2em",
     position: "absolute",
     top: "min(50%, 50vw)",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    color: "var(--color)",
-    border: `1px solid var(--color)`,
+    color: vars.color,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
   });
   style(optionsModal + " > div:nth-child(2)", {
@@ -126,7 +127,7 @@ export function initCss() {
   });
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
-    color: "var(--accent)",
+    color: vars.accent,
   });
   style(claim, {
     textAlign: "center",
@@ -140,7 +141,7 @@ export function initCss() {
   style("button, input[type='submit']", {
     padding: "0.5rem 1rem",
     cursor: "pointer",
-    background: "var(--accent)",
+    background: vars.accent,
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -155,30 +156,11 @@ export function initCss() {
   style(langSelect, {
     border: "1px solid",
     borderRadius: "2px",
-    color: "var(--color)",
-    background: "var(--bg)",
+    color: vars.color,
+    background: vars.bg,
   });
-  style(":root", {
-    "--light": "#fff",
-    "--dark": "#000",
-    "--nightcolor": "#abb2bf",
-    "--nightbg": "#181b20",
-    "--splitsize": "60vw",
-  });
-  style(".light", {
-    "--main-bg": "#edf2fa",
-    "--bg": "#ffffff",
-    "--color": "#81a7e4",
-    "--accent": "#0957d0",
-    "--text": "#474747",
-  });
-  style(".dark", {
-    "--main-bg": "#1f2020",
-    "--bg": "#282828",
-    "--color": "#606060",
-    "--accent": "#3a8dc5",
-    "--text": "#fff",
-  });
+  lightTheme();
+  darkTheme();
   style("main.split", {
     width: "var(--splitsize)",
     resize: "horizontal",
@@ -197,7 +179,7 @@ export function initCss() {
     background: "#fff",
   });
   style(".cm-editor", {
-    backgroundColor: "var(--bg)",
+    backgroundColor: vars.bg,
   });
 
   const resizeListener = () => {
@@ -220,14 +202,14 @@ export function initAnimations() {
 
   style(`${header} a, ${header} select, ${footer} a`, transition(["color"]));
   style(hover(`${header} a, ${header} select, ${footer} a`), {
-    color: "var(--text)",
+    color: vars.text,
   });
 
   style(hover(`${claim} a, ${resetPassword} a`), {
-    color: darken("var(--accent)"),
+    color: darken(vars.accent),
   });
 
   style(hover("button, input[type='submit']"), {
-    background: darken("var(--accent)"),
+    background: darken(vars.accent),
   });
 }

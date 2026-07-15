@@ -20,34 +20,24 @@ import {
   code,
 } from "./refs";
 import { State } from "./state";
+import { darkTheme, lightTheme, supportCssVar, vars } from "../theme";
 
 export function initCss() {
-  const supportCssVar = !!window.CSS?.supports?.("color: var(--x)");
-  const [background, mainBg, color, accentColor, textColor] = supportCssVar
-    ? [
-        "var(--bg)",
-        "var(--main-bg)",
-        "var(--color)",
-        "var(--accent)",
-        "var(--text)",
-      ]
-    : ["white", "white", "black", "#06c", "black"];
-
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
-    accentColor,
-    outlineColor: accentColor,
+    accentColor: vars.accent,
+    outlineColor: vars.accent,
   });
   style("*:not(textarea):not(input)", {
     userSelect: "none",
   });
   style("label", {
-    color: textColor,
+    color: vars.text,
   });
   const appRule = style(app, {
-    background: mainBg,
-    color,
+    background: vars.mainBg,
+    color: vars.color,
     margin: "0",
     padding: "0",
     overflow: "hidden",
@@ -60,8 +50,8 @@ export function initCss() {
     top: "4px",
   });
   style(status + " span", {
-    background,
-    color,
+    background: vars.bg,
+    color: vars.color,
     fontStyle: "italic",
     borderRadius: "4px",
   });
@@ -71,12 +61,12 @@ export function initCss() {
     height: "calc(100% - 24px)",
     margin: "12px",
     padding: "6px",
-    border: `1px solid ${color}`,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
     resize: "none",
     tabSize: "4",
-    background,
-    color: textColor,
+    background: vars.bg,
+    color: vars.text,
     overflowAnchor: "none", // it fixes chromium's scroll anchor bug https://bugs.chromium.org/p/chromium/issues/detail?id=997266
   });
   style(`${textarea}:read-only`, {
@@ -96,12 +86,12 @@ export function initCss() {
   style(`${footer} > span`, { paddingBottom: "7px" });
   style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
     cursor: "pointer",
-    background,
-    color,
+    background: vars.bg,
+    color: vars.color,
   });
   style(`${claim} a, ${resetPassword} a`, {
     textDecoration: "underline",
-    color: accentColor,
+    color: vars.accent,
   });
   style(`${header} a, ${footer} a`, {
     textDecoration: "none",
@@ -120,14 +110,14 @@ export function initCss() {
     zIndex: "1",
   });
   style(modal, {
-    background,
+    background: vars.bg,
     padding: "2em",
     position: "absolute",
     top: "min(50%, 50vw)",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    color,
-    border: `1px solid ${color}`,
+    color: vars.color,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
   });
   style(optionsModal + " > div:nth-child(2)", {
@@ -149,7 +139,7 @@ export function initCss() {
   style("button, input[type='submit']", {
     padding: "0.5rem 1rem",
     cursor: "pointer",
-    background: accentColor,
+    background: vars.accent,
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -161,20 +151,8 @@ export function initCss() {
     margin: "1em 0 -1em 0",
     height: "2ch",
   });
-  themeRules.light = style(".light", {
-    "--main-bg": "#edf2fa",
-    "--bg": "#ffffff",
-    "--color": "#81a7e4",
-    "--accent": "#0957d0",
-    "--text": "#474747",
-  });
-  themeRules.dark = style(".dark", {
-    "--main-bg": "#1f2020",
-    "--bg": "#282828",
-    "--color": "#606060",
-    "--accent": "#3a8dc5",
-    "--text": "#fff",
-  });
+  themeRules.light = lightTheme();
+  themeRules.dark = darkTheme();
   !supportCssVar &&
     style(`${theme}, ${code}, ${markdown}`, {
       display: "none",
@@ -209,14 +187,14 @@ export function initAnimations() {
   style(hover(`${header} > span`), { bottom: "-2px" });
 
   style(`${header} a, ${footer} a`, transition(["color"]));
-  style(hover(`${header} a, ${footer} a`), { color: "var(--text)" });
+  style(hover(`${header} a, ${footer} a`), { color: vars.text });
 
   style(hover(`${claim} a, ${resetPassword} a`), {
-    color: darken("var(--accent)"),
+    color: darken(vars.accent),
   });
 
   style(hover("button, input[type='submit']"), {
-    background: darken("var(--accent)"),
+    background: darken(vars.accent),
   });
 }
 

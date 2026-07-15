@@ -10,39 +10,28 @@ import {
   docList,
   message,
 } from "./refs";
+import { darkTheme, lightTheme, vars } from "../theme";
 
 export function initCss() {
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
-    accentColor: "var(--accent)",
-    outlineColor: "var(--accent)",
+    accentColor: vars.accent,
+    outlineColor: vars.accent,
   });
-  style(".light", {
-    "--main-bg": "#edf2fa",
-    "--bg": "#ffffff",
-    "--color": "#81a7e4",
-    "--accent": "#0957d0",
-    "--text": "#474747",
-  });
-  style(".dark", {
-    "--main-bg": "#1f2020",
-    "--bg": "#282828",
-    "--color": "#606060",
-    "--accent": "#3a8dc5",
-    "--text": "#fff",
-  });
+  lightTheme();
+  darkTheme();
   style(app, {
     minHeight: "100vh",
     margin: "0",
     padding: "0",
-    background: "var(--main-bg)",
-    color: "var(--text)",
+    background: vars.mainBg,
+    color: vars.text,
   });
   style("input", {
-    color: "var(--text)",
-    background: "var(--bg)",
-    border: "1px solid var(--color)",
+    color: vars.text,
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "2px",
     font: "inherit",
   });
@@ -53,7 +42,7 @@ export function initCss() {
   style("button, input[type='submit']", {
     padding: "0.5rem 1rem",
     cursor: "pointer",
-    background: "var(--accent)",
+    background: vars.accent,
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -70,7 +59,7 @@ export function initCss() {
     padding: "0.5rem",
   });
   style("td", {
-    borderTop: "1px solid var(--color)",
+    borderTop: `1px solid ${vars.color}`,
   });
   style("table", {
     width: "100%",
@@ -91,14 +80,14 @@ export function initCss() {
   });
   style(".nav > div", {
     marginRight: "auto",
-    color: "var(--color)",
+    color: vars.color,
   });
   style(".center", {
     width: "min(calc(100% - 24px), 360px)",
     margin: "12vh auto 0",
     padding: "2em",
-    background: "var(--bg)",
-    border: "1px solid var(--color)",
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
   });
   style("td.checkbox", {
@@ -110,33 +99,33 @@ export function initCss() {
     gap: "3px",
   });
   style("a, a:visited", {
-    color: "var(--accent)",
+    color: vars.accent,
   });
   style(loginContainer, {
-    color: "var(--text)",
+    color: vars.text,
   });
   style(content, {
     minHeight: "100vh",
     padding: "12px",
   });
   style(userEmail, {
-    color: "var(--color)",
+    color: vars.color,
   });
   style(message, {
     margin: "12px 0",
     padding: "0.75rem",
-    background: "var(--bg)",
-    border: "1px solid var(--color)",
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
   });
   style(docList, {
-    background: "var(--bg)",
-    border: "1px solid var(--color)",
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
     overflow: "auto",
   });
   style(`${docList} tr:nth-child(2n)`, {
-    background: "var(--main-bg)",
+    background: vars.mainBg,
   });
 
   style(docGrid, {
@@ -147,8 +136,8 @@ export function initCss() {
   });
   style(`${docGrid} > div`, {
     padding: "0.75rem",
-    background: "var(--bg)",
-    border: "1px solid var(--color)",
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "4px",
     minWidth: "0",
   });
@@ -161,14 +150,14 @@ export function initCss() {
   });
   style(`${docGrid} div.header button`, {
     padding: "0.25rem 0.5rem",
-    background: "var(--bg)",
-    color: "var(--accent)",
-    border: "1px solid var(--color)",
+    background: vars.bg,
+    color: vars.accent,
+    border: `1px solid ${vars.color}`,
     borderRadius: "2px",
     cursor: "pointer",
   });
   style(`${docGrid} div.header button.active`, {
-    background: "var(--accent)",
+    background: vars.accent,
     color: "#fff",
   });
   style(`${docGrid} a.docname`, {
@@ -181,9 +170,9 @@ export function initCss() {
     height: "200px",
   });
   style(`${docGrid} div.textarea textarea`, {
-    color: "var(--text)",
-    background: "#f7f9fc",
-    border: "1px solid var(--color)",
+    color: vars.text,
+    background: vars.bg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "2px",
     resize: "none",
     whiteSpace: "pre",
@@ -194,9 +183,9 @@ export function initCss() {
     overflow: "scroll",
   });
   style(`${docGrid} div.textarea > div`, {
-    color: "var(--text)",
-    background: "#f7f9fc",
-    border: "1px solid var(--color)",
+    color: vars.text,
+    background: vars.mainBg,
+    border: `1px solid ${vars.color}`,
     borderRadius: "2px",
     width: "100%",
   });

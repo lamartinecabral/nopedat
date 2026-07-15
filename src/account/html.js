@@ -55,11 +55,11 @@ const elements = [
         ]),
         elem(password2, { hidden: true }, [
           elem("td", [
-            elem(
-              "label",
-              { htmlFor: passwordInput2.id },
-              " Repeat the password: ",
-            ),
+            elem("label", { htmlFor: passwordInput2.id }, [
+              " Repeat the",
+              elem("br"),
+              "password: ",
+            ]),
           ]),
           elem("td", [
             elem(passwordInput2, {
@@ -68,19 +68,20 @@ const elements = [
           ]),
         ]),
       ]),
-      elem(loginSubmit, {
-        type: "submit",
-        className: "margin",
-        value: "Login",
-      }),
+      elem("div", { className: "margin textcenter" }, [
+        elem(loginSubmit, {
+          type: "submit",
+          value: "Login",
+        }),
+      ]),
     ]),
-    elem("div", { className: "margin", hidden: true }, [
+    elem("div", { className: "margin textcenter", hidden: true }, [
       elem(signinMode, { href: "#" }, "Log in"),
     ]),
-    elem("div", { className: "margin" }, [
+    elem("div", { className: "margin textcenter" }, [
       elem(signupMode, { href: "#" }, "create account"),
     ]),
-    elem("div", { className: "margin" }, [
+    elem("div", { className: "margin textcenter" }, [
       elem(resetPassword, { href: "#" }, "reset password"),
     ]),
   ]),

@@ -58,7 +58,7 @@ export function initCss() {
   style("th, td", {
     padding: "0.5rem",
   });
-  style("td", {
+  style(`${docList} td`, {
     borderTop: `1px solid ${vars.color}`,
   });
   style("table", {
@@ -70,6 +70,9 @@ export function initCss() {
   });
   style(".margin", {
     margin: "1em",
+  });
+  style(".textcenter", {
+    textAlign: "center",
   });
   style(".nav", {
     display: "flex",
@@ -83,7 +86,7 @@ export function initCss() {
     color: vars.color,
   });
   style(".center", {
-    width: "min(calc(100% - 24px), 360px)",
+    width: "min(calc(100% - 24px), 430px)",
     margin: "12vh auto 0",
     padding: "2em",
     background: vars.bg,

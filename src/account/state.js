@@ -1,5 +1,6 @@
 // @ts-check
 
+import { Cache } from "../cache";
 import { Subject } from "../utils";
 
 /** @typedef {{id: string, text: string, protected?: string, public?: boolean}} Doc */
@@ -16,4 +17,9 @@ export const State = {
     localStorage.getItem("notepade_mypage_viewmode") || "list",
   ),
   authLock: new Subject(true),
+  nightMode: new Subject(
+    Cache.getNightMode(
+      window.matchMedia?.("(prefers-color-scheme: dark)").matches,
+    ),
+  ),
 };

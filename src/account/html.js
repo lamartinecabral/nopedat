@@ -24,6 +24,7 @@ import {
   app,
 } from "./refs";
 import { elem, getElem } from "../freedom";
+import { State } from "./state";
 
 const elements = [
   elem(loginContainer, { className: "center", hidden: true }, [
@@ -236,5 +237,6 @@ export function docListElem(doc) {
 
 export function initHtml() {
   document.body.id = app.id;
+  app().className = State.nightMode.value ? "dark" : "light";
   for (const element of elements) app().appendChild(element);
 }

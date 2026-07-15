@@ -5,7 +5,10 @@
 const codeBoilerplate = ({ language, source }) => {
   switch (language) {
     case "html": {
-      return source;
+      return source.replace(
+        /<\/body>\s*<\/html>\s*$/,
+        '<script defer>if(document.readyState=="complete")window.dispatchEvent(new CustomEvent("load"))</script></body></html>',
+      );
     }
     case "javascript": {
       return `<script type="module">${source}</script>`;

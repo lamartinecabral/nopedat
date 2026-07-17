@@ -29,7 +29,6 @@ import {
 } from "./refs";
 import { getElem, getChild, getParent } from "../freedom";
 import { Cache } from "../cache";
-import { setGithubIconColor } from "./css";
 
 export function initStateListeners() {
   State.protected.sub(function (value) {
@@ -68,7 +67,6 @@ export function initStateListeners() {
     app().className = themes[+value];
     theme().innerText = themes[+!value];
     Cache.setNightMode(value);
-    setGithubIconColor();
   });
 
   State.showPassword.sub(function (value) {

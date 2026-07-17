@@ -78,6 +78,9 @@ export function initCss() {
     left: "calc(50% - 12px)",
     height: "24px",
   });
+  style(`${github} svg`, { width: "24px" });
+  style(`.light ${github} a`, { color: vars.accent });
+  style(`.dark ${github} a`, { color: vars.mainBg });
   style(`${header}, ${footer}`, { position: "fixed", right: "24px" });
   style(`${header} > span, ${footer} > span`, { display: "inline-block" });
   style(`${header}`, { top: "-2px" });
@@ -203,21 +206,3 @@ const themeRules = {
   light: null,
   dark: null,
 };
-
-export function setGithubIconColor() {
-  const nightMode = State.nightMode.value;
-  const cssRule = themeRules[nightMode ? "dark" : "light"];
-
-  const color = cssRule?.style.getPropertyValue(
-    nightMode ? "--main-bg" : "--accent",
-  );
-
-  if (!color) return;
-
-  const obj = github().querySelector("object");
-  const svg = obj?.contentDocument?.querySelector("svg");
-
-  if (!svg) return;
-
-  svg.style.setProperty("color", color);
-}

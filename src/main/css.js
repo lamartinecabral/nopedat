@@ -23,6 +23,9 @@ import { State } from "./state";
 import { darkTheme, lightTheme, supportCssVar, vars } from "../theme";
 
 export function initCss() {
+  style(":root", {
+    fontSize: "16px",
+  });
   style("*", {
     fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
     boxSizing: "border-box",
@@ -86,7 +89,9 @@ export function initCss() {
   style(`${header}`, { top: "-2px" });
   style(`${header} > span`, { paddingTop: "6px" });
   style(`${footer}`, { bottom: "-2px" });
-  style(`${footer} > span`, { paddingBottom: "7px" });
+  style(`${footer} > span`, { paddingBottom: "3px" });
+  style(`${footer} > span a`, { height: "21px", display: "inline-block" });
+  style(`${footer} > span a svg`, { height: "11px", margin: "4px 0" });
   style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
     cursor: "pointer",
     background: vars.bg,

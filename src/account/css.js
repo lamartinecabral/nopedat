@@ -10,15 +10,10 @@ import {
   docList,
   message,
 } from "./refs";
-import { darkTheme, lightTheme, vars } from "../theme";
+import { baseStyle, darkTheme, lightTheme, vars } from "../theme";
 
 export function initCss() {
-  style("*", {
-    fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
-    boxSizing: "border-box",
-    accentColor: vars.accent,
-    outlineColor: vars.accent,
-  });
+  baseStyle();
   lightTheme();
   darkTheme();
   style(app, {

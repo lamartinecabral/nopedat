@@ -20,18 +20,16 @@ import {
   code,
 } from "./refs";
 import { State } from "./state";
-import { darkTheme, lightTheme, supportCssVar, vars } from "../theme";
+import {
+  baseStyle,
+  darkTheme,
+  lightTheme,
+  supportCssVar,
+  vars,
+} from "../theme";
 
 export function initCss() {
-  style(":root", {
-    fontSize: "16px",
-  });
-  style("*", {
-    fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
-    boxSizing: "border-box",
-    accentColor: vars.accent,
-    outlineColor: vars.accent,
-  });
+  baseStyle();
   style("*:not(textarea):not(input)", {
     userSelect: "none",
   });

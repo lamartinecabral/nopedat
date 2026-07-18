@@ -38,3 +38,17 @@ export const lightTheme = () => {
     "--text": "#474747",
   });
 };
+
+export const baseStyle = () => {
+  return [
+    style(":root", {
+      fontSize: "16px",
+    }),
+    style("*", {
+      fontFamily: "Menlo, monospace",
+      boxSizing: "border-box",
+      accentColor: vars.accent,
+      outlineColor: vars.accent,
+    }),
+  ];
+};

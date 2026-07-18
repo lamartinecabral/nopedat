@@ -18,18 +18,12 @@ import {
   footer,
 } from "./refs";
 import { State } from "./state";
-import { vars, darkTheme, lightTheme } from "../theme";
+import { baseStyle, vars, darkTheme, lightTheme } from "../theme";
 
 export function initCss() {
+  baseStyle();
   style(":root", {
-    fontSize: "16px",
     "--splitsize": "60vw",
-  });
-  style("*", {
-    fontFamily: '"Menlo", "Monaco", "Courier New", monospace',
-    boxSizing: "border-box",
-    accentColor: vars.accent,
-    outlineColor: vars.accent,
   });
   style("label", {
     color: vars.text,

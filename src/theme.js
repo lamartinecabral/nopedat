@@ -39,6 +39,47 @@ export const lightTheme = () => {
   });
 };
 
+export const buttonStyle = () => {
+  return [
+    style(".fixed-button", {
+      textDecoration: "none",
+      border: "1px solid",
+      borderRadius: "2px",
+      padding: "0 2px",
+      cursor: "pointer",
+      background: vars.bg,
+      color: vars.color,
+      transition: "color 0.2s",
+    }),
+    style(".fixed-button:hover", { color: vars.text }),
+
+    style(".action-button", {
+      padding: "0.5rem 1rem",
+      cursor: "pointer",
+      background: vars.accent,
+      color: "#fff",
+      border: "none",
+      borderRadius: "4px",
+      fontFamily: "inherit",
+      fontSize: "inherit",
+      transition: "background 0.2s",
+    }),
+    style(".action-button:hover, .action-button:focus", {
+      background: `hsl(from ${vars.accent} h s calc(l - 15))`,
+    }),
+
+    style(".anchor-button", {
+      textDecoration: "underline",
+      color: vars.accent,
+      cursor: "pointer",
+      transition: "color 0.2s",
+    }),
+    style(".anchor-button:hover", {
+      color: `hsl(from ${vars.accent} h s calc(l - 15))`,
+    }),
+  ];
+};
+
 export const baseStyle = () => {
   return [
     style(":root", {

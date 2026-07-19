@@ -22,6 +22,7 @@ import {
 import { State } from "./state";
 import {
   baseStyle,
+  buttonStyle,
   darkTheme,
   lightTheme,
   supportCssVar,
@@ -30,6 +31,7 @@ import {
 
 export function initCss() {
   baseStyle();
+  buttonStyle();
   style("*:not(textarea):not(input)", {
     userSelect: "none",
   });
@@ -90,21 +92,6 @@ export function initCss() {
   style(`${footer} > span`, { paddingBottom: "3px" });
   style(`${footer} > span a`, { height: "21px", display: "inline-block" });
   style(`${footer} > span a svg`, { height: "11px", margin: "4px 0" });
-  style(`${header} a, ${footer} a, ${claim} a, ${resetPassword} a`, {
-    cursor: "pointer",
-    background: vars.bg,
-    color: vars.color,
-  });
-  style(`${claim} a, ${resetPassword} a`, {
-    textDecoration: "underline",
-    color: vars.accent,
-  });
-  style(`${header} a, ${footer} a`, {
-    textDecoration: "none",
-    border: "1px solid",
-    borderRadius: "2px",
-    padding: "0 2px",
-  });
   style(backdrop, {
     position: "fixed",
     top: "0px",
@@ -142,16 +129,6 @@ export function initCss() {
     textAlign: "center",
     marginTop: "1em",
   });
-  style("button, input[type='submit']", {
-    padding: "0.5rem 1rem",
-    cursor: "pointer",
-    background: vars.accent,
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    fontFamily: "inherit",
-    fontSize: "inherit",
-  });
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",
@@ -178,7 +155,6 @@ export function initAnimations() {
   const transition = (props = []) => ({
     transition: props.map((p) => `${p} 0.2s`).join(", "),
   });
-  const darken = (value) => `hsl(from ${value} h s calc(l - 15))`;
 
   style(github, { cursor: "pointer", ...transition(["transform"]) });
   style(`${github} object`, { pointerEvents: "none" });
@@ -191,17 +167,6 @@ export function initAnimations() {
   });
   style(hover(`${footer} > span`), { bottom: "2px" });
   style(hover(`${header} > span`), { bottom: "-2px" });
-
-  style(`${header} a, ${footer} a`, transition(["color"]));
-  style(hover(`${header} a, ${footer} a`), { color: vars.text });
-
-  style(hover(`${claim} a, ${resetPassword} a`), {
-    color: darken(vars.accent),
-  });
-
-  style(hover("button, input[type='submit']"), {
-    background: darken(vars.accent),
-  });
 }
 
 /** @type {Record<string, CSSStyleRule | null>} */

@@ -12,16 +12,16 @@ import {
   modal,
   optionsModal,
   submitButton,
-  langSelect,
   editor,
   preview,
   footer,
 } from "./refs";
 import { State } from "./state";
-import { baseStyle, vars, darkTheme, lightTheme } from "../theme";
+import { baseStyle, buttonStyle, vars, darkTheme, lightTheme } from "../theme";
 
 export function initCss() {
   baseStyle();
+  buttonStyle();
   style(":root", {
     "--splitsize": "60vw",
   });
@@ -77,24 +77,6 @@ export function initCss() {
   style(`${footer}`, {
     bottom: "4px",
   });
-  style(
-    `${header} a, ${header} select, ${footer} a, ${claim} a, ${resetPassword} a`,
-    {
-      cursor: "pointer",
-      background: vars.bg,
-      color: vars.color,
-    },
-  );
-  style(`${claim} a, ${resetPassword} a`, {
-    textDecoration: "underline",
-    color: vars.accent,
-  });
-  style(`${header} a, ${footer} a`, {
-    textDecoration: "none",
-    border: "1px solid",
-    borderRadius: "2px",
-    padding: "0 2px",
-  });
   style(backdrop, {
     position: "fixed",
     top: "0px",
@@ -123,10 +105,6 @@ export function initCss() {
     marginTop: "1em",
     textAlign: "center",
   });
-  style(`${claim} a, ${resetPassword} a`, {
-    textDecoration: "underline",
-    color: vars.accent,
-  });
   style(claim, {
     textAlign: "center",
     marginBottom: "1em",
@@ -136,26 +114,10 @@ export function initCss() {
     textAlign: "center",
     marginTop: "1em",
   });
-  style("button, input[type='submit']", {
-    padding: "0.5rem 1rem",
-    cursor: "pointer",
-    background: vars.accent,
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    fontFamily: "inherit",
-    fontSize: "inherit",
-  });
   style(resetPassword, {
     textAlign: "center",
     margin: "1em 0 -1em 0",
     height: "2ch",
-  });
-  style(langSelect, {
-    border: "1px solid",
-    borderRadius: "2px",
-    color: vars.color,
-    background: vars.bg,
   });
   lightTheme();
   darkTheme();
@@ -186,28 +148,4 @@ export function initCss() {
   };
   resizeListener();
   window.addEventListener("resize", resizeListener);
-}
-
-export function initAnimations() {
-  if (State.isMobile.value) return;
-
-  const strMap = (str, sep, fn) => String(str).split(sep).map(fn).join(sep);
-  const hover = (selectors) => strMap(selectors, ",", (s) => `${s}:hover`);
-  const transition = (props = []) => ({
-    transition: props.map((p) => `${p} 0.2s`).join(", "),
-  });
-  const darken = (value) => `hsl(from ${value} h s calc(l - 15))`;
-
-  style(`${header} a, ${header} select, ${footer} a`, transition(["color"]));
-  style(hover(`${header} a, ${header} select, ${footer} a`), {
-    color: vars.text,
-  });
-
-  style(hover(`${claim} a, ${resetPassword} a`), {
-    color: darken(vars.accent),
-  });
-
-  style(hover("button, input[type='submit']"), {
-    background: darken(vars.accent),
-  });
 }

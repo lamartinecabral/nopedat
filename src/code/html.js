@@ -38,7 +38,7 @@ const elements = [
   elem("main", [
     elem(status, [elem("span", "Loading...")]),
     elem(header, [
-      elem(langSelect, [
+      elem(langSelect, { className: "fixed-button" }, [
         ...Object.values(Languages).map(({ label, value }) =>
           elem("option", { value }, label),
         ),
@@ -56,14 +56,23 @@ const elements = [
         ]),
       ]),
       " ",
-      elem(password, { hidden: true, href: "#" }, "password"),
-      elem(options, { hidden: true, href: "#" }, "options"),
+      elem(
+        password,
+        { className: "fixed-button", hidden: true, href: "#" },
+        "password",
+      ),
+      elem(
+        options,
+        { className: "fixed-button", hidden: true, href: "#" },
+        "options",
+      ),
     ]),
     elem(footer, { hidden: true }, [
       elem(
         play,
         {
           href: "#",
+          className: "fixed-button",
           title: "shift+click to toggle a preview frame",
           hidden: !State.isMobile.value,
         },
@@ -73,6 +82,7 @@ const elements = [
         previewButton,
         {
           href: "#",
+          className: "fixed-button",
           title: "click to toggle a preview frame",
           hidden: State.isMobile.value,
         },
@@ -100,7 +110,7 @@ const elements = [
               "Public",
             ),
           ]),
-          elem("div", [elem(logout, "logout")]),
+          elem("div", [elem(logout, { className: "action-button" }, "logout")]),
         ]),
         elem(passwordModal, { hidden: true }, [
           elem(claim, { hidden: true }, [
@@ -108,6 +118,7 @@ const elements = [
               "a",
               {
                 href: "#",
+                className: "anchor-button",
                 title:
                   "If you have an account, you can claim and protect this note",
               },
@@ -141,10 +152,18 @@ const elements = [
               ]),
             ]),
             elem(submitButton, [
-              elem("input", { type: "submit", value: "Submit" }),
+              elem("input", {
+                className: "action-button",
+                type: "submit",
+                value: "Submit",
+              }),
             ]),
             elem(resetPassword, { hidden: true }, [
-              elem("a", { href: "#" }, "reset password"),
+              elem(
+                "a",
+                { className: "anchor-button", href: "#" },
+                "reset password",
+              ),
             ]),
           ]),
         ]),

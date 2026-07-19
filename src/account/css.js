@@ -10,10 +10,11 @@ import {
   docList,
   message,
 } from "./refs";
-import { baseStyle, darkTheme, lightTheme, vars } from "../theme";
+import { baseStyle, buttonStyle, darkTheme, lightTheme, vars } from "../theme";
 
 export function initCss() {
   baseStyle();
+  buttonStyle();
   lightTheme();
   darkTheme();
   style(app, {
@@ -33,15 +34,6 @@ export function initCss() {
   style("input[type='text'], input[type='password']", {
     width: "100%",
     padding: "0.4rem 0.5rem",
-  });
-  style("button, input[type='submit']", {
-    padding: "0.5rem 1rem",
-    cursor: "pointer",
-    background: vars.accent,
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-    font: "inherit",
   });
   style("button:disabled", {
     cursor: "not-allowed",
@@ -95,9 +87,6 @@ export function initCss() {
     display: "flex",
     alignItems: "center",
     gap: "3px",
-  });
-  style("a, a:visited", {
-    color: vars.accent,
   });
   style(loginContainer, {
     color: vars.text,

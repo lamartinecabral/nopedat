@@ -63,8 +63,9 @@ export const buttonStyle = () => {
       fontFamily: "inherit",
       fontSize: "inherit",
       transition: "background 0.2s",
+      outlineColor: "#fff",
     }),
-    style(".action-button:hover, .action-button:focus", {
+    style(".action-button:hover", {
       background: `hsl(from ${vars.accent} h s calc(l - 15))`,
     }),
 

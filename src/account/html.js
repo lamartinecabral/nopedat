@@ -70,27 +70,36 @@ const elements = [
       ]),
       elem("div", { className: "margin textcenter" }, [
         elem(loginSubmit, {
+          className: "action-button",
           type: "submit",
           value: "Login",
         }),
       ]),
     ]),
     elem("div", { className: "margin textcenter", hidden: true }, [
-      elem(signinMode, { href: "#" }, "Log in"),
+      elem(signinMode, { className: "anchor-button", href: "#" }, "Log in"),
     ]),
     elem("div", { className: "margin textcenter" }, [
-      elem(signupMode, { href: "#" }, "create account"),
+      elem(
+        signupMode,
+        { className: "anchor-button", href: "#" },
+        "create account",
+      ),
     ]),
     elem("div", { className: "margin textcenter" }, [
-      elem(resetPassword, { href: "#" }, "reset password"),
+      elem(
+        resetPassword,
+        { className: "anchor-button", href: "#" },
+        "reset password",
+      ),
     ]),
   ]),
   elem(content, { hidden: true }, [
     elem("div", { className: "nav margin" }, [
       elem(userEmail),
-      elem(logout, "logout"),
-      elem(claimButton, ["claim"]),
-      elem(changeLayout, ["layout"]),
+      elem(logout, { className: "action-button" }, "logout"),
+      elem(claimButton, { className: "action-button" }, "claim"),
+      elem(changeLayout, { className: "action-button" }, "layout"),
     ]),
     elem(message, { className: "margin" }, "Loading..."),
     elem(docGrid),
@@ -121,9 +130,9 @@ export function docGridElem(doc) {
       elem(
         "a",
         {
-          href: "../?" + doc.id,
+          href: location.origin + "/?" + doc.id,
           target: "_blank",
-          className: "docname",
+          className: "docname anchor-button",
           title: doc.id,
         },
         doc.id,
@@ -177,7 +186,7 @@ export function docGridElem(doc) {
               id: "bt_" + doc.id,
               disabled: !!doc.protected,
               onclick: () => Control.removeDoc(doc),
-              className: "margin",
+              className: "margin action-button",
             },
             "drop",
           ),
@@ -196,7 +205,9 @@ export function docListElem(doc) {
         {
           id: "a_" + doc.id,
           href: location.origin + "/?" + doc.id,
+          target: "_blank",
           title: trunc(doc.text, 280),
+          className: "anchor-button",
         },
         doc.id,
       ),
@@ -229,6 +240,7 @@ export function docListElem(doc) {
           id: "bt_" + doc.id,
           disabled: !!doc.protected,
           onclick: () => Control.removeDoc(doc),
+          className: "action-button",
         },
         "drop",
       ),

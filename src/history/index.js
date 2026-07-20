@@ -1,6 +1,8 @@
 // @ts-check
 import { elem, style } from "../freedom";
 import { NoteHistory } from "../utils";
+import { baseStyle, buttonStyle, darkTheme, lightTheme, vars } from "../theme";
+import { Cache } from "../cache";
 
 const buildList = () => {
   document.body.replaceChildren();
@@ -32,12 +34,16 @@ const buildTable = (list) =>
         elem(
           "tr",
           [
-            elem("a", { href: noteUrl(docId) }, docId),
+            elem(
+              "a",
+              { className: "anchor-button", href: noteUrl(docId) },
+              docId,
+            ),
             formatDate(lastAccess),
             elem(
               "button",
               {
-                className: "remove",
+                className: "remove action-button",
                 onclick: () => remove(docId),
                 title: `Remove ${docId} from history`,
               },
@@ -58,90 +64,85 @@ const formatDate = (value) => {
   return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString();
 };
 
-style("*", {
-  boxSizing: "border-box",
-  fontFamily: '"SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace',
-});
+baseStyle();
+buttonStyle();
+lightTheme();
+darkTheme();
 style("body", {
-  background: "linear-gradient(135deg, #f6f7f5 0%, #e8eef0 100%)",
-  color: "#172422",
+  background: vars.mainBg,
+  color: vars.text,
   margin: "0",
   minHeight: "100vh",
-  padding: "clamp(1.25rem, 5vw, 4rem)",
+  padding: "12px",
 });
 style("h1", {
   fontSize: "1.5rem",
   fontWeight: "700",
   letterSpacing: "0",
-  margin: "0 0 1.25rem",
+  margin: "1rem",
 });
 style("table", {
-  background: "#fffefd",
-  border: "1px solid #d6dfda",
-  borderCollapse: "separate",
-  borderRadius: "8px",
+  background: vars.bg,
+  border: `1px solid ${vars.color}`,
   borderSpacing: "0",
-  boxShadow: "0 12px 28px rgba(24, 45, 40, 0.09)",
-  margin: "0",
+  borderRadius: "4px",
+  margin: "1rem",
   overflow: "hidden",
-  width: "100%",
 });
 style("td, th", {
-  borderBottom: "1px solid #e6ece8",
-  padding: "0.875rem 1rem",
+  padding: "0.5rem",
+});
+style("td", {
+  borderTop: `1px solid ${vars.color}`,
 });
 style("th", {
-  background: "#eff4f1",
-  color: "#48615a",
-  fontSize: "0.75rem",
-  fontWeight: "700",
+  color: vars.text,
   textAlign: "left",
-  textTransform: "uppercase",
 });
 style("tbody tr:last-child td", { borderBottom: "none" });
 style("td:first-child", { fontWeight: "600", overflowWrap: "anywhere" });
-style("td:nth-child(2)", { color: "#60736d", fontSize: "0.875rem" });
+style("td:nth-child(2)", { color: vars.color, fontSize: "0.875rem" });
 style("td:last-child, th:last-child", {
   paddingLeft: "0",
   textAlign: "right",
   width: "1%",
 });
-style("a", { color: "#126b56", textDecoration: "none" });
-style("a:hover", { textDecoration: "underline" });
-style("a:focus-visible", { borderRadius: "2px", outline: "2px solid #17735d" });
+style("a:focus-visible", {
+  borderRadius: "2px",
+  outline: `2px solid ${vars.accent}`,
+});
 style("button.remove", {
-  background: "transparent",
-  border: "1px solid #c7d3cd",
-  borderRadius: "4px",
-  color: "#456159",
+  padding: "0.25rem 0.5rem",
   cursor: "pointer",
   fontSize: "0.75rem",
   opacity: "0",
-  padding: "0.375rem 0.5rem",
   whiteSpace: "nowrap",
 });
 style("button.remove:hover", {
-  background: "#fff0ee",
-  borderColor: "#d28a81",
-  color: "#9d3029",
+  background: `hsl(from ${vars.accent} h s calc(l - 15))`,
 });
-style("tr:is(:hover, :has(:focus))", { background: "#f4f9f6" });
+style("tr:is(:hover, :has(:focus))", { background: vars.mainBg });
 style("tr:is(:hover, :has(:focus)) button.remove", { opacity: "1" });
 style("button.remove:focus-visible", {
   opacity: "1",
-  outline: "2px solid #17735d",
+  outline: `2px solid ${vars.accent}`,
 });
 style(".touch button.remove", { opacity: "1" });
 style(".empty", {
-  background: "#fffefd",
-  border: "1px dashed #bac9c1",
-  borderRadius: "8px",
-  color: "#60736d",
+  background: vars.bg,
+  border: `1px solid ${vars.color}`,
+  borderRadius: "4px",
+  color: vars.text,
   margin: "0",
   padding: "2rem",
   textAlign: "center",
 });
 
+document.body.className = Cache.getNightMode(
+  window.matchMedia?.("(prefers-color-scheme: dark)").matches,
+)
+  ? "dark"
+  : "light";
 if (!matchMedia("(hover: hover)").matches) document.body.classList.add("touch");
 
 function remove(id) {

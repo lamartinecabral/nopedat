@@ -23,7 +23,14 @@
     <link href="/assets/css/menlo.css" rel="stylesheet" />
     <script src="/assets/js/loadscript.js"></script>
     <script>
-      if (!window.Proxy) {
+      var checkLegacyBrowser = function () {
+        try {
+          return !!eval("null?.a");
+        } catch (e) {
+          return true;
+        }
+      };
+      if (checkLegacyBrowser()) {
         if (location.hash === "#eruda")
           loadscript("https://cdn.jsdelivr.net/npm/eruda", {
             onload: function () {

@@ -102,6 +102,7 @@ export function initCss() {
     backdropFilter: "blur(4px)",
     zIndex: "1",
   });
+  style(modal, { top: "50%" }); // fallback for browsers that don't support min() function
   style(modal, {
     background: vars.bg,
     padding: "2em",

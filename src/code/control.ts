@@ -1,5 +1,3 @@
-// @ts-check
-
 import { Service } from "./service";
 import { State } from "./state";
 import { delayLatest } from "../utils";

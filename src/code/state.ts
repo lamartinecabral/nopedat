@@ -1,5 +1,3 @@
-// @ts-check
-
 import { randomString, Subject, NoteHistory } from "../utils";
 import { Cache } from "../cache";
 import { parseLanguage as lang } from "./model";
@@ -23,8 +21,7 @@ export const State = {
   ),
   isMobile: new Subject(window.innerWidth <= 480),
 
-  /** @type {string | null} */
-  lastLoadedText: null,
+  lastLoadedText: null as string | null,
 
   get readonly() {
     return this.protected.value && this.public.value && !this.isLogged.value;

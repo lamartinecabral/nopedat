@@ -15,9 +15,9 @@ const entries = {
     "js/markdown": "./src/markdown/index.js",
     "js/marked": "./src/marked/index.js",
     "js/html": "./src/html/index.js",
-    "js/code": "./src/code/index.js",
-    "js/code.worker": "./src/code/worker.js",
-    "js/code.boilerplate": "./src/code/boilerplate.js",
+    "js/code": "./src/code/index.ts",
+    "js/code.worker": "./src/code/worker.ts",
+    "js/code.boilerplate": "./src/code/boilerplate.ts",
     "js/qrcode": "./src/qrcode/index.js",
     "js/history": "./src/history/index.js",
     "js/codemirror": "./src/codemirror/index.js",
@@ -30,6 +30,17 @@ const entries = {
       "process.env.FIREBASE_CONFIG": JSON.stringify(FIREBASE_CONFIG),
     }),
   ],
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+      },
+    ],
+  },
 };
 
 const es5Entries = {

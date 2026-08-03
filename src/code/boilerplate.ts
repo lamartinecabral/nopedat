@@ -1,4 +1,3 @@
-// @ts-check
 /** @typedef {keyof typeof import('./model').Languages} Languages */
 
 /** @type {(opts: {language: Languages, source: string}) => string} */

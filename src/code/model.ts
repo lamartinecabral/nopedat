@@ -1,5 +1,3 @@
-// @ts-check
-
 export const Languages = {
   plaintext: {
     value: "plaintext",

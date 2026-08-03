@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {keyof typeof import('./model').Languages} Languages
  * @typedef {import('prettier')} PrettierStandalone

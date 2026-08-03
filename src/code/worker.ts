@@ -1,7 +1,13 @@
-// @ts-check
 importScripts("/js/marked.js");
 importScripts("/js/code.boilerplate.js");
 importScripts("/assets/babel@7.27.2/babel.min.js");
+
+type Language = keyof typeof import("./model").Languages;
+type CodeBoilerplate = (options: {
+  language: Language;
+  source: string;
+}) => string;
+type Babel = typeof import("@babel/standalone");
 
 postMessage("codeWorkerReady");
 
@@ -19,7 +25,13 @@ addEventListener("message", (ev) => {
   }
 });
 
-const getParsedCode = ({ language, source }) => {
+const getParsedCode = ({
+  language,
+  source,
+}: {
+  language: Language;
+  source: string;
+}) => {
   switch (language) {
     case "html": {
       return codeBoilerplate({ language: "html", source });
@@ -53,16 +65,16 @@ const getParsedCode = ({ language, source }) => {
   }
 };
 
-/** @type {() => import ('@babel/standalone')}  */
-const getBabel = () => {
-  // @ts-ignore
-  if ("Babel" in self) return self["Babel"];
+const getBabel = (): Babel => {
+  const babel = (self as typeof self & { Babel?: Babel }).Babel;
+  if (babel) return babel;
   throw new Error("@babel/standalone module not imported");
 };
 
-/** @type {import ('./boilerplate').codeBoilerplateFn}  */
-const codeBoilerplate = (param) => {
-  // @ts-ignore
-  if ("codeBoilerplate" in self) return self["codeBoilerplate"](param);
+const codeBoilerplate: CodeBoilerplate = (param) => {
+  const boilerplate = (
+    self as typeof self & { codeBoilerplate?: CodeBoilerplate }
+  ).codeBoilerplate;
+  if (boilerplate) return boilerplate(param);
   throw new Error("code.boilerplate module not imported");
 };

@@ -1,5 +1,3 @@
-// @ts-check
-
 import { State } from "./state";
 import { Html } from "./html";
 import * as firebase from "../firebase";
@@ -18,8 +16,8 @@ const {
   signOut,
 } = firebase.auth;
 
-/** @type {any} */ let offSnapshot = null;
-/** @type {any} */ let offAuthStateChanged = null;
+let offSnapshot: (() => void) | null = null;
+let offAuthStateChanged: (() => void) | null = null;
 
 export function initAuthListener() {
   if (offAuthStateChanged) offAuthStateChanged();

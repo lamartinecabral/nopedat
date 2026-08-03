@@ -34,7 +34,7 @@ const entries = {
 
 const es5Entries = {
   entry: {
-    "js/main": "./src/main/index.js",
+    "js/main": "./src/main/index.ts",
     "js/firebase8": "./src/firebase8/index.js",
   },
   plugins: [
@@ -42,6 +42,9 @@ const es5Entries = {
       "process.env.FIREBASE_CONFIG": JSON.stringify(FIREBASE_CONFIG),
     }),
   ],
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   module: {
     rules: [
       {

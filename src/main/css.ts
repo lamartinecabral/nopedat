@@ -1,5 +1,3 @@
-// @ts-check
-
 import { style } from "../freedom";
 import { assert } from "../utils";
 import {
@@ -153,7 +151,7 @@ export function initAnimations() {
 
   const strMap = (str, sep, fn) => String(str).split(sep).map(fn).join(sep);
   const hover = (selectors) => strMap(selectors, ",", (s) => `${s}:hover`);
-  const transition = (props = []) => ({
+  const transition = (props: string[] = []) => ({
     transition: props.map((p) => `${p} 0.2s`).join(", "),
   });
 
@@ -170,8 +168,7 @@ export function initAnimations() {
   style(hover(`${header} > span`), { bottom: "-2px" });
 }
 
-/** @type {Record<string, CSSStyleRule | null>} */
-const themeRules = {
+const themeRules: Record<string, CSSStyleRule | null> = {
   light: null,
   dark: null,
 };

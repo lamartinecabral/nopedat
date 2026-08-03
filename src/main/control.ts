@@ -1,5 +1,3 @@
-// @ts-check
-
 import { Service } from "./service";
 import { State } from "./state";
 import { debounce, imgResize, toDataURL } from "../utils";
@@ -246,7 +244,7 @@ export function initEventListeners() {
 
   textarea().addEventListener(
     "input",
-    debounce(function () {
+    debounce<() => void>(function () {
       State.status.pub("Saving...");
       Service.save()
         .then(() => {

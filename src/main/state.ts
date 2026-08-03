@@ -1,5 +1,3 @@
-// @ts-check
-
 import { randomString, Subject, NoteHistory } from "../utils";
 import { Cache } from "../cache";
 

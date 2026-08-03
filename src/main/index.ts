@@ -1,5 +1,3 @@
-// @ts-check
-
 import { initEventListeners, initStateListeners } from "./control";
 import { initAnimations, initCss } from "./css";
 import { app } from "./refs";

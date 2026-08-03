@@ -1,5 +1,3 @@
-// @ts-check
-
 import { refElem } from "../freedom";
 
 export const app = refElem("body");

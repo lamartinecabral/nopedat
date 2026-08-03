@@ -1,5 +1,3 @@
-// @ts-check
-
 import { initEventListeners, initStateListeners } from "./control";
 import { initCss } from "./css";
 import { initHtml } from "./html";

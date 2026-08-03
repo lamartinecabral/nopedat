@@ -1,5 +1,3 @@
-// @ts-check
-
 import { trunc } from "../utils";
 import { Control } from "./control";
 import {
@@ -161,8 +159,11 @@ export function docGridElem(doc) {
                 id: "cbprot_" + doc.id,
                 type: "checkbox",
                 checked: !!doc.protected,
-                onchange: (/** @type {any} */ ev) => {
-                  Control.setProtected(doc.id, ev.target.checked);
+                onchange: (ev: Event) => {
+                  Control.setProtected(
+                    doc.id,
+                    (ev.target as HTMLInputElement).checked,
+                  );
                 },
               }),
               "protected",
@@ -173,8 +174,11 @@ export function docGridElem(doc) {
                 type: "checkbox",
                 disabled: !doc.protected,
                 checked: !!doc.public,
-                onchange: (/** @type {any} */ ev) => {
-                  Control.setPublic(doc.id, ev.target.checked);
+                onchange: (ev: Event) => {
+                  Control.setPublic(
+                    doc.id,
+                    (ev.target as HTMLInputElement).checked,
+                  );
                 },
               }),
               "public",
@@ -217,8 +221,8 @@ export function docListElem(doc) {
         id: "cbprot_" + doc.id,
         type: "checkbox",
         checked: !!doc.protected,
-        onchange: (/** @type {any} */ ev) => {
-          Control.setProtected(doc.id, ev.target.checked);
+        onchange: (ev: Event) => {
+          Control.setProtected(doc.id, (ev.target as HTMLInputElement).checked);
         },
       }),
     ]),
@@ -228,8 +232,8 @@ export function docListElem(doc) {
         type: "checkbox",
         disabled: !doc.protected,
         checked: !!doc.public,
-        onchange: (/** @type {any} */ ev) => {
-          Control.setPublic(doc.id, ev.target.checked);
+        onchange: (ev: Event) => {
+          Control.setPublic(doc.id, (ev.target as HTMLInputElement).checked);
         },
       }),
     ]),

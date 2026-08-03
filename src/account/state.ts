@@ -1,20 +1,23 @@
-// @ts-check
-
 import { Cache } from "../cache";
 import { Subject } from "../utils";
 
-/** @typedef {{id: string, text: string, protected?: string, public?: boolean}} Doc */
+export type Doc = {
+  id: string;
+  text: string;
+  protected?: string;
+  public?: boolean;
+};
 
 export const State = {
-  /** @type {Subject<boolean>} */ // @ts-ignore
-  isLogged: new Subject(null),
+  isLogged: new Subject<boolean | null>(null),
   userEmail: new Subject(""),
   signupMode: new Subject(false),
-  /** @type {Doc[]} */ docs: [],
+  docs: [] as Doc[],
   message: new Subject("Loading..."),
-  /** @type {Subject<'grid' | 'list'>} */ // @ts-ignore
-  viewMode: new Subject(
-    localStorage.getItem("notepade_mypage_viewmode") || "list",
+  viewMode: new Subject<"grid" | "list">(
+    (localStorage.getItem("notepade_mypage_viewmode") || "list") as
+      | "grid"
+      | "list",
   ),
   authLock: new Subject(true),
   nightMode: new Subject(

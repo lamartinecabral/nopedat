@@ -1,7 +1,5 @@
-// @ts-check
-
 import { Control } from "./control";
-import { State } from "./state";
+import { State, type Doc } from "./state";
 import * as firebase from "../firebase";
 
 const { auth, db } = firebase.initApp();
@@ -28,7 +26,7 @@ const {
   signOut,
 } = firebase.auth;
 
-/** @type {any} */ let offAuthStateChanged = null;
+let offAuthStateChanged: (() => void) | null = null;
 
 export function initAuthListener() {
   if (offAuthStateChanged) offAuthStateChanged();
@@ -129,10 +127,11 @@ export class Service {
     return sendPasswordResetEmail(auth, email);
   }
 
-  /** @returns {Promise<import("./state").Doc>} */
-  static getDoc(id) {
-    // @ts-ignore
-    return getDoc(doc(db, "docs", id)).then((snap) => ({ ...snap.data(), id }));
+  static getDoc(id: string): Promise<Doc> {
+    return getDoc(doc(db, "docs", id)).then((snap) => ({
+      ...(snap.data() as Omit<Doc, "id">),
+      id,
+    }));
   }
 
   static update(docum, obj) {

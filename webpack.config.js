@@ -10,7 +10,7 @@ if (!FIREBASE_CONFIG) {
 
 const entries = {
   entry: {
-    "js/account": "./src/account/index.js",
+    "js/account": "./src/account/index.ts",
     "js/secret": "./src/secret/index.js",
     "js/markdown": "./src/markdown/index.js",
     "js/marked": "./src/marked/index.js",

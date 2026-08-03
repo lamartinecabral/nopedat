@@ -1,5 +1,3 @@
-// @ts-check
-
 import { getChild, getElem, getParent } from "../freedom";
 import {
   loginContainer,

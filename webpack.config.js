@@ -21,7 +21,7 @@ const entries = {
     "js/qrcode": "./src/qrcode/index.js",
     "js/history": "./src/history/index.js",
     "js/codemirror": "./src/codemirror/index.ts",
-    "js/firebase": "./src/firebase/index.js",
+    "js/firebase": "./src/firebase/index.ts",
     "js/download": "./src/download/index.js",
     "js/mermaid": "./src/mermaid/index.js",
   },
@@ -46,7 +46,7 @@ const entries = {
 const es5Entries = {
   entry: {
     "js/main": "./src/main/index.ts",
-    "js/firebase8": "./src/firebase8/index.js",
+    "js/firebase8": "./src/firebase8/index.ts",
   },
   plugins: [
     new webpack.DefinePlugin({

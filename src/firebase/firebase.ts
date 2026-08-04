@@ -1,4 +1,3 @@
-// @ts-check
 import { initializeApp } from "firebase/app";
 import {
   collection,
@@ -24,12 +23,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { firebaseConfig } from "./config.js";
+import { firebaseConfig } from "./config";
 
-/**
- * @param {string} [name]
- */
-export const initApp = (name) => {
+export const initApp = (name?: string) => {
   const app = initializeApp(firebaseConfig, name);
   return {
     get db() {

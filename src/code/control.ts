@@ -32,7 +32,6 @@ import { format } from "./formatter";
 import { Cache } from "../cache";
 import { getParsedCode } from "./preview";
 
-/** @typedef {import('../codemirror/index')} */
 const Editor = window.codemirror;
 
 export function initStateListeners() {

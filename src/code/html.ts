@@ -29,7 +29,6 @@ import { elem } from "../freedom";
 import { Languages } from "./model";
 import { State } from "./state";
 
-/** @type {import('../codemirror/codemirror')} */
 const Editor = window.codemirror;
 
 const elements = [

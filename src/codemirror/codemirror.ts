@@ -1,10 +1,9 @@
-// @ts-check
 import { basicSetup } from "codemirror";
 import { EditorView, keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
 import { EditorSelection, EditorState } from "@codemirror/state";
 import { syntaxTree } from "@codemirror/language";
-import { linter } from "@codemirror/lint";
+import { linter, type Diagnostic } from "@codemirror/lint";
 import { html } from "@codemirror/lang-html";
 import { javascript } from "@codemirror/lang-javascript";
 import { css } from "@codemirror/lang-css";
@@ -17,15 +16,13 @@ import { mermaid } from "codemirror-lang-mermaid";
 
 let changeHandler;
 
-/** @param {(text: string) => void} func */
-export const onChange = (func) => {
+export const onChange = (func: (text: string) => void) => {
   changeHandler = func;
 };
 
 let modSHandler;
 
-/** @param {() => void} func */
-export const onModS = (func) => {
+export const onModS = (func: () => void) => {
   modSHandler = func;
 };
 
@@ -53,8 +50,7 @@ const changeListener = EditorView.updateListener.of((update) => {
 });
 
 const syntaxErrorLinter = linter((view) => {
-  /** @type {import("@codemirror/lint").Diagnostic[]} */
-  const diagnostics = [];
+  const diagnostics: Diagnostic[] = [];
   syntaxTree(view.state)
     .cursor()
     .iterate((node) => {
@@ -98,11 +94,9 @@ let nightMode = false;
 
 let readonly = false;
 
-/** @type {EditorView} */
-let editor;
+let editor: EditorView;
 
-/** @param {string} text */
-const state = (text) => {
+const state = (text: string) => {
   const stateProps = {
     doc: text,
     extensions: [
@@ -125,12 +119,10 @@ const state = (text) => {
   }
 };
 
-/**
- * @template T
- * @param {T extends Element ? T : never} parent
- * @param {{nightMode?: boolean}} [options]
- */
-export const initEditor = (parent, options) => {
+export const initEditor = <T extends Element>(
+  parent: T,
+  options?: { nightMode?: boolean },
+) => {
   nightMode = options?.nightMode === true;
   editor = new EditorView({
     ...state(""),
@@ -143,10 +135,8 @@ export const getValue = () => {
 };
 
 /**
- * @param {string} text
- * @param {number} [cursor]
  * */
-export const setValue = (text, cursor) => {
+export const setValue = (text: string, cursor?: number) => {
   if (!editor) return;
   const transaction = {
     changes: [{ from: 0, to: editor.state.doc.length, insert: text }],
@@ -165,7 +155,6 @@ export const setValue = (text, cursor) => {
   }
 };
 
-/** @returns {number | undefined} */
 export const getCursor = () => {
   if (!editor) return;
   if (editor.state.selection.ranges.length !== 1) return;
@@ -174,15 +163,14 @@ export const getCursor = () => {
   return from;
 };
 
-/** @param {string} lang */
-export const setLanguage = (lang) => {
+export const setLanguage = (lang: string) => {
   if (currentLang !== lang) {
     currentLang = lang;
     editor && editor.setState(state(getValue()));
   }
 };
 
-export const setReadonly = (value) => {
+export const setReadonly = (value: boolean) => {
   if (value === readonly) return;
   readonly = value;
   editor && editor.setState(state(getValue()));

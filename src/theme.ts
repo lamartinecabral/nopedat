@@ -1,4 +1,3 @@
-// @ts-check
 import { style } from "./freedom";
 
 export const supportCssVar = !!window.CSS?.supports?.("color: var(--x)");

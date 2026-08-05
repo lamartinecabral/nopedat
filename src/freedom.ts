@@ -1,5 +1,4 @@
-// @ts-check
-/** @typedef {import('@lamartinecabral/freedom')} */
+/// <reference types="@lamartinecabral/freedom" />
 
 const { elem, getChild, getElem, getParent, queryElem, refElem, style, media } =
   window.freedom;

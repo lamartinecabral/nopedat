@@ -24,6 +24,8 @@ const entries = {
     "js/firebase": "./src/firebase/index.ts",
     "js/download": "./src/download/index.js",
     "js/mermaid": "./src/mermaid/index.js",
+    "js/iboss": "./src/iframe/boss.ts",
+    "js/iworker": "./src/iframe/worker.ts",
   },
   plugins: [
     new webpack.DefinePlugin({

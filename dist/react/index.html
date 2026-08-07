@@ -17,11 +17,11 @@
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-  <script src="/iframe/handler.js"></script>
+  <script src="/js/iboss.js"></script>
   <script>
 
     const docId = location.search.substring(1).toLowerCase();
-    const { auth, db } = _firebase.initApp(docId || '');
+    const { auth, db } = _firebase.initApp(docId || undefined);
     const { doc, onSnapshot } = _firebase.firestore;
 
     let killLiveContent = null

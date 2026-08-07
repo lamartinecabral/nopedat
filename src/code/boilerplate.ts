@@ -4,10 +4,7 @@
 const codeBoilerplate = ({ language, source }) => {
   switch (language) {
     case "html": {
-      return source.replace(
-        /<\/body>\s*<\/html>\s*$/,
-        '<script defer>if(document.readyState=="complete")window.dispatchEvent(new CustomEvent("load"))</script></body></html>',
-      );
+      return source;
     }
     case "javascript": {
       return `<script type="module">${source}</script>`;
@@ -28,9 +25,8 @@ const codeBoilerplate = ({ language, source }) => {
       return (
         `<body><div id="root"></div><script type="module">\n` +
         `import "/assets/react@19.2.0/bundle.js";\n` +
-        `try {\n` +
         `${source}\n` +
-        `ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App, null)); }` +
+        `try { ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App, null)); }` +
         `catch (e) { console.error(e); document.getElementById("root").innerHTML = '<pre style="color:red;">' + String(e) + '</pre>';}` +
         `</script></body>`
       );

@@ -1,40 +1,26 @@
-const getWorker = async (): Promise<ServiceWorker | null> => {
-  if (!("serviceWorker" in navigator)) {
-    console.log(1);
-    return null;
-  }
+const getWorker = async () => {
+  if (!("serviceWorker" in navigator)) return null;
 
   const registrations = await navigator.serviceWorker.getRegistrations();
 
-  if (registrations[0]?.active) {
-    return registrations[0].active;
-  }
+  if (registrations[0]?.active) return registrations[0].active;
 
   try {
-    const registration = await navigator.serviceWorker.register(
-      "/iframe/sw.js",
-      {
-        scope: "/iframe/",
-      },
-    );
+    const url = "/iframe/sw.js";
+    const scope = "/iframe/";
+    const registration = await navigator.serviceWorker.register(url, { scope });
 
-    if (registration.active && registration.active.state === "activated") {
-      return registration.active;
-    }
+    if (registration.active?.state === "activated") return registration.active;
 
-    // 2. Identify the target ServiceWorker instance
     const sw =
       registration.installing || registration.waiting || registration.active;
 
-    if (!sw) {
-      throw new Error("No Service Worker found in registration.");
-    }
+    if (!sw) throw new Error("No Service Worker found in registration.");
 
-    // 3. Wait for the state to transition to 'activated'
-    return new Promise((resolve, reject) => {
-      sw.addEventListener("statechange", (event) => {
-        if (event?.target?.["state"] === "activated") {
-          resolve(event.target as ServiceWorker);
+    return new Promise<ServiceWorker>((resolve, reject) => {
+      sw.addEventListener("statechange", ({ target }) => {
+        if (target instanceof ServiceWorker && target.state === "activated") {
+          resolve(target);
         }
       });
       setTimeout(reject, 1000);
@@ -51,15 +37,19 @@ const setResourceContent = async (
   content: string,
   contentType?: string,
 ) => {
-  return getWorker().then((worker) => {
-    if (!worker) throw new Error("Service worker is not active");
+  const worker = await getWorker();
 
+  if (!worker) throw new Error("Service worker is not active");
+
+  return new Promise((resolve) => {
     worker.postMessage({
       type: "resource",
       name,
       content,
       contentType,
     });
+
+    setTimeout(resolve, 0);
   });
 };
 
@@ -91,8 +81,7 @@ async function setContent(text: string) {
     addIframeHashChangeListener();
     if (xy)
       setTimeout(() => {
-        const wind = iframe && iframe.contentWindow;
-        xy && wind && wind.scrollTo(...xy);
+        if (xy) iframe.contentWindow?.scrollTo(...xy);
       }, 10);
   });
 }

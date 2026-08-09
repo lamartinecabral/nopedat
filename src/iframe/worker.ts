@@ -7,6 +7,7 @@ const resources = new Map();
 self.addEventListener("message", (event) => {
   if (event.data?.type === "resource") {
     resources.set(event.data.name, event.data);
+    event.source?.postMessage({ ...event.data, success: true });
   }
 });
 

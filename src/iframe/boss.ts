@@ -41,7 +41,17 @@ const setResourceContent = async (
 
   if (!worker) throw new Error("Service worker is not active");
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    const listener = (ev: MessageEvent) => {
+      if (ev.data.name === name) {
+        if (ev.data.success) resolve(true);
+        else reject(new Error("Service worker could not set resource"));
+        navigator.serviceWorker.removeEventListener("message", listener);
+      }
+    };
+
+    navigator.serviceWorker.addEventListener("message", listener);
+
     worker.postMessage({
       type: "resource",
       name,
@@ -49,7 +59,8 @@ const setResourceContent = async (
       contentType,
     });
 
-    setTimeout(resolve, 0);
+    // Fallback in case the service worker does not respond
+    setTimeout(resolve, 2000);
   });
 };
 

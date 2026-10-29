@@ -40,4 +40,5 @@ pre {
   padding: 1rem;
   border-radius: 6px;
   background-color: hsla(0, 0%, 50%, 0.1);
+  overflow-x: scroll;
 }

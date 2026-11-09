@@ -86,7 +86,7 @@ export const baseStyle = () => {
       fontSize: "16px",
     }),
     style("*", {
-      fontFamily: "Menlo, monospace",
+      fontFamily: '"IBM Plex Mono", Menlo, monospace',
       boxSizing: "border-box",
       accentColor: vars.accent,
       outlineColor: vars.accent,
